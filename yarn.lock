@@ -7749,6 +7749,11 @@ vue@^2.6.10:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
 
+vuexplosive-modal@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/vuexplosive-modal/-/vuexplosive-modal-1.1.2.tgz#22a541e84cb9ab41081c084575ecd411771c8cdd"
+  integrity sha512-ECFClpT93by2wQnLKzbWsmmIbHjxO5zvt6exSJzPhLMcyN+z9LSuB7FxMpRhK7qfPI/llC6z2r2PyCiD0gKbcQ==
+
 watchpack@^1.5.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.6.0.tgz#4bc12c2ebe8aa277a71f1d3f14d685c7b446cd00"

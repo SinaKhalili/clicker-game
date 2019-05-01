@@ -1,7 +1,7 @@
 <template>
   <div class="fl pa3 ma2 b--solid bg-red shadow-5 db pa3">
     <h3>Stats</h3>
-    <table v-for="(att, name) in allStats" :key="att" class=".striped--light-silver:nth-child(odd)">
+    <table v-for="(att, name) in allStats" :key="att">
       <tr>
         <td>
           <h2>{{ name }} -></h2>
@@ -9,10 +9,18 @@
         <td class="f1">{{ att }}</td>
       </tr>
     </table>
+    <VuexplosiveModal
+      :visible="showModal"
+      title=" 🔥 Ethan unlocked! 🔥 "
+      :content="modalContent"
+      footer="<button> Equip </button>"
+    ></VuexplosiveModal>
   </div>
 </template>
 
 <script>
+import VuexplosiveModal from './VuexplosiveModal'
+
 import eventBus from '../eventBus'
 import { setTimeout, setInterval } from 'timers'
 export default {
@@ -23,6 +31,21 @@ export default {
     eventBus.$on('game-tick', data => {
       this.think =
         this.think - this.subtractor > 0 ? this.think - this.subtractor : 0
+      for (let num = 0; num < this.clickThresholds.length; num++) {
+        if (this.think > this.clickThresholds[num]) {
+          eventBus.$emit(
+            'send-modal',
+            `<h1> Spinny hat ethan </h1> <p> congrats on ${
+              this.clickThresholds[num]
+            } clicks! </p>`
+          )
+          this.clickThresholds.splice(num, 1)
+        }
+      }
+    })
+    eventBus.$on('send-modal', data => {
+      this.modalContent = data
+      this.toggleModal()
     })
     setInterval(() => {
       eventBus.$emit('game-tick')
@@ -30,11 +53,14 @@ export default {
   },
   data() {
     return {
-      think: 4,
+      think: 0,
       cool: 1,
       money: 20,
       arefs: 69,
-      subtractor: 0.05
+      subtractor: 0.05,
+      showModal: false,
+      modalContent: '<h1> Spinny hat ethan </h1> <p> +12 😎',
+      clickThresholds: [10, 50, 100, 250, 500, 1000, 2000, 3500]
     }
   },
   computed: {
@@ -49,6 +75,14 @@ export default {
         money: `${c} 💰`,
         energy: `${d} 🍆`
       }
+    }
+  },
+  components: {
+    VuexplosiveModal
+  },
+  methods: {
+    toggleModal() {
+      this.showModal = !this.showModal
     }
   }
 }

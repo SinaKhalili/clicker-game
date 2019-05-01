@@ -1,18 +1,22 @@
 <template>
   <div class="fl ma2 tc b--solid bg-light-red shadow-5 dib pa3">
     <h3 class="helvetica">Ethan Level : {{ ethanLevel }}</h3>
-    <p class="helvetica">{{ ethanQuotes[3]}}</p>
+    <blockquote class="athelas mw5 ml0 mt0 pl4 black-90 bl bw2 b--blue">{{ ethanQuotes[1]}}</blockquote>
     <h1 class="code">{{ cummulativeThink }}</h1>
     <div class="db mb1">
-      <button class="bg-light-blue f2 helvetica" @click="clickThink">Think 🤔</button>
+      <a
+        class="f1 grow no-underline br-pill ph3 pv2 mb2 dib white bg-white"
+        @click="clickThink"
+        href="#0"
+      >🤔</a>
     </div>
     <img class="mw5" :src="getImageUrl()">
     <p>Current Ethan:</p>
-    <div class="tl code" v-for="entry in ethanstats" :key="entry.name">
-      <p>Name : {{ entry.name }}</p>
-      <p>Rarity : {{ entry.rarity }}</p>
-      <p>Boosters : {{ entry.boosters }}</p>
-      <p>Description : {{ entry.description }}</p>
+    <div class="tl code mw5">
+      <p>Name : {{ currEthan.name }}</p>
+      <p>Rarity : {{ currEthan.rarity }}</p>
+      <p>Boosters : {{ currEthan.boosters }}</p>
+      <p>Description : {{ currEthan.description }}</p>
     </div>
   </div>
 </template>
@@ -45,7 +49,6 @@ export default {
     return {
       clickMultipliers: 1,
       clickAdders: 0,
-      ethanLevel: 0,
       ethanQuotes: [
         'Um, I mean, yea',
         "Listen, traps aren't gay. The US army ... ",
@@ -61,14 +64,32 @@ export default {
       ],
       currPic: 'cow_cyrus.jpg',
       cummulativeThink: 0,
-      ethanstats: [
-        {
-          name: 'cow cyrus',
-          rarity: 'shiny',
-          boosters: ' +15 🤔 per click, energy 🍆 costs 50% lower',
-          description: 'To this day, only a few have been found in the wild'
-        }
+      currEthan: {
+        name: 'cow cyrus',
+        rarity: 'shiny',
+        boosters: ' +15 🤔 per click, energy 🍆 costs 50% lower',
+        description: 'To this day, very few have been found in the wild'
+      },
+      levels: [
+        1000000,
+        500000,
+        100000,
+        50000,
+        21000,
+        15000,
+        8000,
+        2500,
+        1000,
+        500,
+        100,
+        50,
+        10
       ]
+    }
+  },
+  computed: {
+    ethanLevel() {
+      return this.levels.filter(num => num < this.cummulativeThink).length
     }
   }
 }

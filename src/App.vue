@@ -3,6 +3,7 @@
     <ethan-pic/>
     <stats/>
     <progressions/>
+    <inventory/>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import ethanPic from './components/ethanPic.vue'
 import stats from './components/stats.vue'
 import progressions from './components/progressions.vue'
+import inventory from './components/inventory.vue'
 
 export default {
   name: 'app',
@@ -21,7 +23,8 @@ export default {
   components: {
     ethanPic,
     stats,
-    progressions
+    progressions,
+    inventory
   }
 }
 </script>
