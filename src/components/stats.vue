@@ -31,17 +31,6 @@ export default {
     eventBus.$on('game-tick', data => {
       this.think =
         this.think - this.subtractor > 0 ? this.think - this.subtractor : 0
-      for (let num = 0; num < this.clickThresholds.length; num++) {
-        if (this.think > this.clickThresholds[num]) {
-          eventBus.$emit(
-            'send-modal',
-            `<h1> Spinny hat ethan </h1> <p> congrats on ${
-              this.clickThresholds[num]
-            } clicks! </p>`
-          )
-          this.clickThresholds.splice(num, 1)
-        }
-      }
     })
     eventBus.$on('send-modal', data => {
       this.modalContent = data

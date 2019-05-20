@@ -23,6 +23,8 @@
 
 <script>
 import EventBus from '../eventBus'
+import VuexplosiveModal from './VuexplosiveModal'
+
 export default {
   methods: {
     clickThink() {
@@ -38,7 +40,17 @@ export default {
   },
   mounted() {
     EventBus.$on('game-tick', () => {
-      /* Pass */
+      for (let num = 0; num < this.clickThresholds.length; num++) {
+        if (this.cummulativeThink >= this.clickThresholds[num]) {
+          EventBus.$emit(
+            'send-modal',
+            `<h1> Spinny hat ethan </h1> <p> congrats on ${
+              this.clickThresholds[num]
+            } clicks! </p>`
+          )
+          this.clickThresholds.splice(num, 1)
+        }
+      }
     })
     EventBus.$on('think-click', data => {
       this.cummulativeThink += data.thinks
@@ -84,8 +96,14 @@ export default {
         100,
         50,
         10
-      ]
+      ],
+      clickThresholds: [10, 50, 100, 250, 500, 1000, 2000, 3500],
+      showModal: false,
+      modalContent: '<h1> Spinny hat ethan </h1> <p> +12 😎'
     }
+  },
+  components: {
+    VuexplosiveModal
   },
   computed: {
     ethanLevel() {
