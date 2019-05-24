@@ -31,10 +31,31 @@ export default {
     eventBus.$on('game-tick', data => {
       this.think =
         this.think - this.subtractor > 0 ? this.think - this.subtractor : 0
+
+      // eventBus.$emit('stat-update', {
+      //   cool: this.cool,
+      //   think: this.think,
+      //   money: this.money,
+      //   energy: this.energy
+      // })
     })
     eventBus.$on('send-modal', data => {
       this.modalContent = data
       this.toggleModal()
+    })
+    eventBus.$on('buy-item', data => {
+      let unit = this.units[data.unit]
+      console.log(this[unit])
+      if (this[unit] - data.price >= 0) {
+        this[unit] -= data.price
+        console.log('Item bought')
+        eventBus.$emit('item-bought', data)
+        //success
+      } else {
+        this.unit += data.price
+        eventBus.$emit('not-enough')
+        //fail
+      }
     })
     setInterval(() => {
       eventBus.$emit('game-tick')
@@ -45,11 +66,16 @@ export default {
       think: 0,
       cool: 1,
       money: 20,
-      arefs: 69,
+      energy: 69,
       subtractor: 0.05,
       showModal: false,
       modalContent: '<h1> Spinny hat ethan </h1> <p> +12 😎',
-      clickThresholds: [10, 50, 100, 250, 500, 1000, 2000, 3500]
+      clickThresholds: [10, 50, 100, 250, 500, 1000, 2000, 3500],
+      units: {
+        '🤔': 'think',
+        '💰': 'money',
+        '😎': 'cool'
+      }
     }
   },
   computed: {
@@ -57,7 +83,7 @@ export default {
       let a = this.cool
       let b = this.think
       let c = this.money
-      let d = this.arefs
+      let d = this.energy
       return {
         cool: `${a} 😎`,
         think: `${b.toFixed(2)} 🤔`,
