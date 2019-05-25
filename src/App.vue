@@ -4,6 +4,7 @@
     <stats/>
     <progressions/>
     <inventory/>
+    <achievements/>
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import ethanPic from './components/ethanPic.vue'
 import stats from './components/stats.vue'
 import progressions from './components/progressions.vue'
 import inventory from './components/inventory.vue'
+import achievements from './components/achievements.vue'
 
 export default {
   name: 'app',
@@ -24,7 +26,8 @@ export default {
     ethanPic,
     stats,
     progressions,
-    inventory
+    inventory,
+    achievements
   }
 }
 </script>
