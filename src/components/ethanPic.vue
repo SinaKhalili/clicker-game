@@ -5,7 +5,7 @@
     <h1 class="code">{{ cummulativeThink }}</h1>
     <div class="db mb1">
       <a
-        class="f1 grow no-underline br-pill ph3 pv2 mb2 dib white bg-white"
+        class="f1 unselectable grow no-underline br-pill ph3 pv2 mb2 dib white bg-white"
         @click="clickThink"
         href="#0"
       >🤔</a>
