@@ -24,6 +24,11 @@ export default {
       viewAllAchievements: false,
       unlocked_achievements: [
         {
+          name: 'Achievement unlocked',
+          grade: '🥉',
+          desc: 'Achievement unclocked when unlocking an achievement'
+        },
+        {
           name: 'Please add sans undertale',
           grade: '🥉',
           desc: 'Unlocked when defeating SANS undertale'
