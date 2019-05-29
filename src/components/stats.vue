@@ -53,6 +53,7 @@ export default {
         //success
       } else {
         this.unit += data.price
+        this.$toasted.global.broke('&nbsp; 😏💩 ')
         eventBus.$emit('not-enough')
         //fail
       }

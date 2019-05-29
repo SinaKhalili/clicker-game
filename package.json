@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "vue": "^2.6.10",
+    "vue-toasted": "^1.1.27",
     "vuexplosive-modal": "^1.1.2"
   },
   "devDependencies": {

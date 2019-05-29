@@ -18,11 +18,28 @@
 </template>
 
 <script>
+import eventBus from '../eventBus'
 export default {
+  mounted() {
+    eventBus.$on('achievement-unlocked', data => {
+      for (let i = 0; i < this.locked_achievements.length; i++) {
+        if (this.locked_achievements[i].name === data) {
+          this.unlocked_achievements.push(this.locked_achievements[i])
+          this.locked_achievements.splice(i, 1)
+          this.$toasted.global.achievement(data)
+        }
+      }
+    })
+  },
   data() {
     return {
       viewAllAchievements: false,
       unlocked_achievements: [
+        {
+          name: 'Achievement unlocked',
+          grade: '🥉',
+          desc: 'Achievement unclocked when unlocking an achievement'
+        },
         {
           name: 'Please add sans undertale',
           grade: '🥉',
