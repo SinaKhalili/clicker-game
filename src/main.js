@@ -1,11 +1,47 @@
 import Vue from 'vue'
+import Toasted from 'vue-toasted'
 import App from './App.vue'
-
-Vue.config.productionTip = false
 
 // Importing the global css file
 import '@/assets/global.css'
 
+Vue.config.productionTip = false
+Vue.use(Toasted)
+Vue.toasted.register(
+  'achievement',
+  payload => {
+    return '<h3> 🏆 Achievement Unlocked!  🏆 &nbsp; </h3> ' + payload
+  },
+  {
+    type: 'info',
+    theme: 'outline',
+    position: 'top-right',
+    action: {
+      text: 'Close',
+      onClick: (e, toastObject) => {
+        toastObject.goAway(0)
+      }
+    }
+  }
+)
+Vue.toasted.register(
+  'broke',
+  payload => {
+    return 'Ur too broke kid' + payload
+  },
+  {
+    type: 'error',
+    theme: 'outline',
+    position: 'top-right',
+    duration: '450',
+    action: {
+      text: 'Close',
+      onClick: (e, toastObject) => {
+        toastObject.goAway(0)
+      }
+    }
+  }
+)
 new Vue({
   render: h => h(App)
 }).$mount('#app')

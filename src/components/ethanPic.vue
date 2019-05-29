@@ -30,6 +30,7 @@ export default {
     clickThink() {
       let clickVal = 1 * this.clickMultipliers + this.clickAdders
       EventBus.$emit('think-click', { thinks: clickVal })
+      EventBus.$emit('achievement-unlocked', 'Organized af')
     },
     getPic() {
       return this.ethanPics[1]
