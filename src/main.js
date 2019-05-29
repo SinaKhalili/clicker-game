@@ -10,7 +10,7 @@ Vue.use(Toasted)
 Vue.toasted.register(
   'achievement',
   payload => {
-    return '<h3> 🏆 Achievement Unlocked!  🏆 &nbsp; </h3> ' + payload
+    return '<h3> 🏆 Achievement Unlocked!  🏆 &nbsp;&nbsp; </h3> ' + payload
   },
   {
     type: 'info',
