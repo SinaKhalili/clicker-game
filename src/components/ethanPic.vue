@@ -1,5 +1,6 @@
 <template>
   <div class="fl ma2 tc b--solid bg-light-red shadow-5 dib pa3">
+    <v-dialog/>
     <h3 class="helvetica">Ethan Level : {{ ethanLevel }}</h3>
     <blockquote class="athelas mw5 ml0 mt0 pl4 black-90 bl bw2 b--blue">{{ ethanQuotes[1]}}</blockquote>
     <h1 class="code">{{ cummulativeThink }}</h1>
@@ -40,6 +41,24 @@ export default {
     }
   },
   mounted() {
+    this.$modal.show('dialog', {
+      title: "Let's play a game",
+      text: "It's an idle clicker",
+      buttons: [
+        {
+          title: 'Close',
+          handler: () => {
+            alert('Woot!')
+          }
+        },
+        {
+          title: 'Actual close',
+          handler: () => {
+            alert('Just kidding also woot')
+          }
+        }
+      ]
+    })
     EventBus.$on('game-tick', () => {
       for (let num = 0; num < this.clickThresholds.length; num++) {
         if (this.cummulativeThink >= this.clickThresholds[num]) {
@@ -95,10 +114,9 @@ export default {
         1000,
         500,
         100,
-        50,
-        10
+        50
       ],
-      clickThresholds: [10, 50, 100, 250, 500, 1000, 2000, 3500],
+      clickThresholds: [50, 100, 250, 500, 1000, 2000, 3500],
       showModal: false,
       modalContent: '<h1> Spinny hat ethan </h1> <p> +12 😎'
     }

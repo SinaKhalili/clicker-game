@@ -4,7 +4,7 @@
     <stats/>
     <progressions/>
     <inventory/>
-    <achievements/>
+    <achievements v-show="achievements"/>
   </div>
 </template>
 
@@ -14,6 +14,7 @@ import stats from './components/stats.vue'
 import progressions from './components/progressions.vue'
 import inventory from './components/inventory.vue'
 import achievements from './components/achievements.vue'
+import eventBus from './eventBus'
 
 export default {
   name: 'app',
@@ -28,6 +29,16 @@ export default {
     progressions,
     inventory,
     achievements
+  },
+  data() {
+    return {
+      achievements: true
+    }
+  },
+  mounted() {
+    eventBus.$on('think-click', data => {
+      //this.achievements = true
+    })
   }
 }
 </script>
