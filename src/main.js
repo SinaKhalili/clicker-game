@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Toasted from 'vue-toasted'
+import vmodal from 'vue-js-modal'
 import App from './App.vue'
 
 // Importing the global css file
 import '@/assets/global.css'
 
 Vue.config.productionTip = false
+Vue.use(vmodal, { dialog: true })
 Vue.use(Toasted)
 Vue.toasted.register(
   'achievement',
