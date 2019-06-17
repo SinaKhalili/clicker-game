@@ -58,29 +58,44 @@ export default {
           }
         }
       ]
-    })
-    EventBus.$on('game-tick', () => {
-      for (let num = 0; num < this.clickThresholds.length; num++) {
-        if (this.cummulativeThink >= this.clickThresholds[num]) {
-          EventBus.$emit(
-            'send-modal',
-            `<h1> Spinny hat ethan </h1> <p> congrats on ${
-              this.clickThresholds[num]
-            } clicks! </p>`
-          )
-          this.clickThresholds.splice(num, 1)
+    }),
+      EventBus.$on('game-tick', () => {
+        for (let num = 0; num < this.clickThresholds.length; num++) {
+          if (this.cummulativeThink >= this.clickThresholds[num]) {
+            EventBus.$emit(
+              'send-modal',
+              `<h1> Spinny hat ethan </h1> <p> congrats on ${
+                this.clickThresholds[num]
+              } clicks! </p>`
+            )
+            this.clickThresholds.splice(num, 1)
+          }
         }
-      }
-    })
+      })
     EventBus.$on('think-click', data => {
       this.cummulativeThink += data.thinks
-      /* Pass */
-    })
+    }),
+      EventBus.$on('item-bought', data => {
+        //pass
+        console.log(data)
+        console.log(parseFloat(data.clickAdders))
+        this.clickMultipliers += parseFloat(data.clickMultipliers)
+          ? parseFloat(data.clickMultipliers)
+          : 0
+        this.clickAdders += parseFloat(data.clickAdders)
+          ? parseFloat(data.clickAdders)
+          : 0
+        this.tickFlux += data.tickFlux ? data.tickFlux : 0
+      }),
+      setInterval(() => {
+        EventBus.$emit('game-tick', { tickFlux: this.tickFlux })
+      }, 500)
   },
   data() {
     return {
       clickMultipliers: 1,
       clickAdders: 0,
+      tickFlux: -0.05,
       ethanQuotes: [
         'Um, I mean, yea',
         "Listen, traps aren't gay. The US army ... ",

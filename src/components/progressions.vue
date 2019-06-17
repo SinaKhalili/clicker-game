@@ -40,7 +40,10 @@ export default {
           effect: ' + 0.01 🤔 per second',
           price: 5,
           unit: `🤔`,
-          owned: 0
+          owned: 0,
+          clickAdders: '0',
+          clickMultipliers: '0.0',
+          tickFlux: 0.01
         },
         {
           name: 'Spinny hat',
