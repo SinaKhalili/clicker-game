@@ -26,18 +26,11 @@ import { setTimeout, setInterval } from 'timers'
 export default {
   mounted() {
     eventBus.$on('think-click', data => {
-      this.think += 1
+      this.think += data.thinks
     })
     eventBus.$on('game-tick', data => {
       this.think =
-        this.think - this.subtractor > 0 ? this.think - this.subtractor : 0
-
-      // eventBus.$emit('stat-update', {
-      //   cool: this.cool,
-      //   think: this.think,
-      //   money: this.money,
-      //   energy: this.energy
-      // })
+        this.think + data.tickFlux > 0 ? this.think + data.tickFlux : 0
     })
     eventBus.$on('send-modal', data => {
       this.modalContent = data
@@ -58,9 +51,6 @@ export default {
         //fail
       }
     })
-    setInterval(() => {
-      eventBus.$emit('game-tick')
-    }, 500)
   },
   data() {
     return {
@@ -68,7 +58,6 @@ export default {
       cool: 1,
       money: 20,
       energy: 69,
-      subtractor: 0.05,
       showModal: false,
       modalContent: '<h1> Spinny hat ethan </h1> <p> +12 😎',
       clickThresholds: [10, 50, 100, 250, 500, 1000, 2000, 3500],
