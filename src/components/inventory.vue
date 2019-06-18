@@ -17,11 +17,11 @@
     <ul class="list pl0 ml0 center mw5 ba b--light-silver br3">
       <li
         v-for="item in items"
-        :key="item"
+        :key="item.name"
         class="pointer grow ph3 pv2 bb b--light-silver"
         @click="viewStats(item)"
       >
-        <div>{{ item }}</div>
+        <div class="badge1" :data-badge=" ` ${item.owned} `">{{ item.name }}</div>
       </li>
     </ul>
     <a @click="viewItems()" href="#" class="top-0 right-0">{{showItems}}</a>
@@ -33,7 +33,9 @@ import eventBus from '../eventBus'
 export default {
   mounted() {
     eventBus.$on('item-bought', data => {
-      this.items.push(data.name)
+      if (!this.items.includes(data)) {
+        this.items.push(data)
+      }
     })
   },
   data() {
@@ -73,4 +75,18 @@ export default {
 </script>
 
 <style>
+.badge1 {
+  position: relative;
+}
+.badge1[data-badge]:after {
+  content: attr(data-badge);
+  position: absolute;
+  right: 1px;
+  background: red;
+  color: white;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  box-shadow: 0 0 1px #333;
+}
 </style>
