@@ -77,8 +77,6 @@ export default {
     }),
       EventBus.$on('item-bought', data => {
         //pass
-        console.log(data)
-        console.log(parseFloat(data.clickAdders))
         this.clickMultipliers += parseFloat(data.clickMultipliers)
           ? parseFloat(data.clickMultipliers)
           : 0

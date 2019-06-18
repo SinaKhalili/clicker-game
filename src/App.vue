@@ -19,9 +19,7 @@ import eventBus from './eventBus'
 export default {
   name: 'app',
   methods: {
-    thisFunction() {
-      console.log('Hi')
-    }
+    thisFunction() {}
   },
   components: {
     ethanPic,
