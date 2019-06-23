@@ -7,7 +7,7 @@
         v-for="achievement in recentAchievements"
         :key="achievement.name"
         class="pointer grow ph3 pv2 bb b--black"
-        @click="viewStats(achievement)"
+        @click="viewAchievementStats(achievement)"
       >
         <div class="dib w-90">{{ achievement.name }}</div>
         <div class="dib f3 w-10">{{ achievement.grade }}</div>
@@ -45,7 +45,6 @@ export default {
           grade: '🥉',
           desc: 'Unlocked when defeating SANS undertale'
         },
-
         {
           name: 'Call me sonicfox9k',
           grade: '🥉',
@@ -56,13 +55,11 @@ export default {
           grade: '🥉',
           desc: 'Unlocked when seshin a quadro'
         },
-
         {
           name: 'Not even a platformer',
           grade: '🥉',
           desc: 'Unlocked when being lazy and making an idle clicker game'
         },
-
         {
           name: 'Lookin ass',
           grade: '🥉',
@@ -92,8 +89,17 @@ export default {
     viewAchievements() {
       this.viewAllAchievements = !this.viewAllAchievements
     },
-    viewStats(item) {
-      console.log(item)
+    viewAchievementStats(a) {
+      this.$modal.show('dialog', {
+        title: `<h1> Achievement: ${a.name} </h1>`,
+        text: `<p class="f4">  Grade : ${a.grade} </p>
+               <p class="f4">  <em> ${a.desc} </em> </p>`,
+        buttons: [
+          {
+            title: 'Close'
+          }
+        ]
+      })
     }
   }
 }

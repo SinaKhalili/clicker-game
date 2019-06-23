@@ -5,11 +5,11 @@
     <ul class="list pl0 ml0 center mw5 ba b--light-silver br3">
       <li
         v-for="item in recentEthans"
-        :key="item"
+        :key="item.name"
         class="pointer grow ph3 pv2 bb b--light-silver"
-        @click="viewStats(item)"
+        @click="viewEthanStats(item)"
       >
-        <div>{{ item }}</div>
+        <div>{{ item.name }}</div>
       </li>
     </ul>
     <a @click="viewEthans()" href="#" class="top-0 right-0">{{showEthans}}</a>
@@ -36,11 +36,22 @@ export default {
       if (!this.items.includes(data)) {
         this.items.push(data)
       }
+      if (data.achievement) {
+        eventBus.$emit('achievement-unlocked', data.achievement)
+      }
     })
   },
   data() {
     return {
-      ethans: ['beginning ethan', 'l337 ethan', 'GoodCalc ethan', 'cow cyrus'],
+      ethans: [
+        {
+          name: 'cow cyrus',
+          rarity: 'shiny',
+          effect: ' +15 🤔 per click, energy 🍆 costs 50% lower',
+          desc: 'To this day, very few have been found in the wild',
+          image: 'cow_cyrus.jpg'
+        }
+      ],
       viewAllEthans: false,
       items: [],
       viewAllItems: false
@@ -68,7 +79,34 @@ export default {
       this.viewAllItems = !this.viewAllItems
     },
     viewStats(a) {
-      console.log(a)
+      this.$modal.show('dialog', {
+        title: `<h1> Item: ${a.name} </h1>`,
+        text: `<img src=${a.image ? require('../assets/items/' + a.image) : ''}>
+               <p class="f4"> "${a.desc}" </p>
+               <p class="f5"> Effect: ${a.effect} </p>
+               <p class="f5"> Owned: ${a.owned} </p>`,
+        buttons: [
+          {
+            title: 'Close'
+          }
+        ]
+      })
+    },
+    viewEthanStats(a) {
+      this.$modal.show('dialog', {
+        title: `<h1> Ethan: ${a.name} </h1>`,
+        text: `<img src=${
+          a.image ? require('../assets/ethans/' + a.image) : ''
+        } class="mw5">
+               <p class="f4"> "${a.desc}" </p>
+               <p class="f5"> Rarity: <em> ${a.rarity} </em> </p>
+               <p class="f5"> Effect: ${a.effect} </p>`,
+        buttons: [
+          {
+            title: 'Close'
+          }
+        ]
+      })
     }
   }
 }
@@ -88,5 +126,7 @@ export default {
   line-height: 18px;
   border-radius: 50%;
   box-shadow: 0 0 1px #333;
+  font-weight: bolder;
+  font-family: Arial, Helvetica, sans-serif;
 }
 </style>

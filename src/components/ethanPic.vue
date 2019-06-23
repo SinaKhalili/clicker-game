@@ -3,7 +3,6 @@
     <v-dialog/>
     <h3 class="helvetica">Ethan Level : {{ ethanLevel }}</h3>
     <blockquote class="athelas mw5 ml0 mt0 pl4 black-90 bl bw2 b--blue">{{ ethanQuotes[1]}}</blockquote>
-    <h1 class="code">{{ cummulativeThink }}</h1>
     <div class="db mb1">
       <a
         class="f1 unselectable grow no-underline br-pill ph3 pv2 mb2 dib white bg-white"
@@ -16,9 +15,10 @@
     <div class="tl code mw5">
       <p>Name : {{ currEthan.name }}</p>
       <p>Rarity : {{ currEthan.rarity }}</p>
-      <p>Boosters : {{ currEthan.boosters }}</p>
-      <p>Description : {{ currEthan.description }}</p>
+      <p>Effect : {{ currEthan.effect }}</p>
+      <p>Description : {{ currEthan.desc }}</p>
     </div>
+    <h3 class="code">Accrued thought: {{ cummulativeThink }}</h3>
   </div>
 </template>
 
@@ -31,13 +31,12 @@ export default {
     clickThink() {
       let clickVal = 1 * this.clickMultipliers + this.clickAdders
       EventBus.$emit('think-click', { thinks: clickVal })
-      EventBus.$emit('achievement-unlocked', 'Organized af')
     },
     getPic() {
       return this.ethanPics[1]
     },
     getImageUrl() {
-      return require('../assets/' + this.currPic)
+      return require('../assets/ethans/' + this.currEthan.image)
     }
   },
   mounted() {
@@ -107,13 +106,13 @@ export default {
         'ethan_beedie.jpg',
         'dabbing_ethan.jpg'
       ],
-      currPic: 'cow_cyrus.jpg',
       cummulativeThink: 0,
       currEthan: {
         name: 'cow cyrus',
         rarity: 'shiny',
-        boosters: ' +15 🤔 per click, energy 🍆 costs 50% lower',
-        description: 'To this day, very few have been found in the wild'
+        effect: ' +15 🤔 per click, energy 🍆 costs 50% lower',
+        desc: 'To this day, very few have been found in the wild',
+        image: 'cow_cyrus.jpg'
       },
       levels: [
         1000000,
