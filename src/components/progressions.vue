@@ -44,7 +44,11 @@ export default {
           clickMultipliers: '0.0',
           tickFlux: 0.01,
           image: 'class_schedule.png',
-          achievement: 'Organized af'
+          run: a => {
+            if (a.owned === 1) {
+              eventBus.$emit('achievement-unlocked', 'Organized af')
+            }
+          }
         },
         {
           name: 'Spinny hat',

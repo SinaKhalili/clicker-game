@@ -24,7 +24,7 @@ export default {
     eventBus.$on('achievement-unlocked', data => {
       for (let i = 0; i < this.locked_achievements.length; i++) {
         if (this.locked_achievements[i].name === data) {
-          this.unlocked_achievements.push(this.locked_achievements[i])
+          this.unlocked_achievements.unshift(this.locked_achievements[i])
           this.locked_achievements.splice(i, 1)
           this.$toasted.global.achievement(data)
         }
@@ -70,7 +70,7 @@ export default {
         {
           name: 'Organized af',
           grade: '🥉',
-          desc: 'Unlocked after acquiring the semester schedule'
+          desc: 'Unlocked after acquiring 150 semester schedules'
         }
       ]
     }

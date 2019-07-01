@@ -39,6 +39,9 @@ export default {
       if (data.achievement) {
         eventBus.$emit('achievement-unlocked', data.achievement)
       }
+      if (data.run) {
+        data.run(data)
+      }
     })
   },
   data() {
