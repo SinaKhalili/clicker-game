@@ -49,7 +49,19 @@ export default {
           rarity: 'shiny',
           effect: ' +15 🤔 per click, energy 🍆 costs 50% lower',
           desc: 'To this day, very few have been found in the wild',
-          image: 'cow_cyrus.jpg'
+          image: 'cow_cyrus.jpg',
+          adder: 15,
+          multiplier: 1
+        },
+        {
+          name: 'dabbing ethan',
+          rarity: 'shiny + ',
+          effect: ' +5 🤔 per click',
+          desc:
+            'This very cool ethan will dab on every hater before finishing them off swiftly in a game of fortnite',
+          image: 'dabbing_ethan.jpg',
+          adder: 5,
+          multiplier: 1
         }
       ],
       viewAllEthans: false,
@@ -92,6 +104,9 @@ export default {
         ]
       })
     },
+    equipEthan(ethan) {
+      eventBus.$emit('ethan-change', ethan)
+    },
     viewEthanStats(a) {
       this.$modal.show('dialog', {
         title: `<h1> Ethan: ${a.name} </h1>`,
@@ -102,6 +117,12 @@ export default {
                <p class="f5"> Rarity: <em> ${a.rarity} </em> </p>
                <p class="f5"> Effect: ${a.effect} </p>`,
         buttons: [
+          {
+            title: '🔽 <b> Equip </b> ',
+            handler: () => {
+              this.equipEthan(a)
+            }
+          },
           {
             title: 'Close'
           }

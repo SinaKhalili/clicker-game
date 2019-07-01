@@ -30,6 +30,7 @@ export default {
   methods: {
     clickThink() {
       let clickVal = 1 * this.clickMultipliers + this.clickAdders
+      clickVal = clickVal * this.ethanClickMultipliers + this.ethanClickAdder
       EventBus.$emit('think-click', { thinks: clickVal })
     },
     getPic() {
@@ -70,6 +71,9 @@ export default {
             this.clickThresholds.splice(num, 1)
           }
         }
+      }),
+      EventBus.$on('ethan-change', data => {
+        this.currEthan = data
       })
     EventBus.$on('think-click', data => {
       this.cummulativeThink += data.thinks
@@ -112,6 +116,8 @@ export default {
         rarity: 'shiny',
         effect: ' +15 🤔 per click, energy 🍆 costs 50% lower',
         desc: 'To this day, very few have been found in the wild',
+        adder: 15,
+        multiplier: 1,
         image: 'cow_cyrus.jpg'
       },
       levels: [
@@ -128,7 +134,7 @@ export default {
         100,
         50
       ],
-      clickThresholds: [50, 100, 250, 500, 1000, 2000, 3500],
+      clickThresholds: [100, 250, 500, 1000, 2000, 3500],
       showModal: false,
       modalContent: '<h1> Spinny hat ethan </h1> <p> +12 😎'
     }
@@ -139,6 +145,12 @@ export default {
   computed: {
     ethanLevel() {
       return this.levels.filter(num => num < this.cummulativeThink).length
+    },
+    ethanClickMultipliers() {
+      return this.currEthan.multiplier
+    },
+    ethanClickAdder() {
+      return this.currEthan.adder
     }
   }
 }
