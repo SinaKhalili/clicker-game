@@ -45,7 +45,7 @@ export default {
           tickFlux: 0.01,
           image: 'class_schedule.png',
           run: a => {
-            if (a.owned === 1) {
+            if (a.owned === 10) {
               eventBus.$emit('achievement-unlocked', 'Organized af')
             }
           }

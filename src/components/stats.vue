@@ -11,9 +11,9 @@
     </table>
     <VuexplosiveModal
       :visible="showModal"
-      title=" 🔥 Ethan unlocked! 🔥 "
+      title=" 🔥 LEVEL UP! 🔥 "
       :content="modalContent"
-      footer="<button> Equip </button>"
+      footer="Your ETHAN LEVEL has INCREASED"
     ></VuexplosiveModal>
   </div>
 </template>
@@ -25,6 +25,14 @@ import eventBus from '../eventBus'
 import { setTimeout, setInterval } from 'timers'
 export default {
   mounted() {
+    eventBus.$on('enemy-attack', data => {
+      if( this.energy - data.damage_per_tick > 0){
+        this.energy -= data.damage_per_tick
+      }
+      else{
+        alert('Thou art dead')
+      }
+    })
     eventBus.$on('think-click', data => {
       this.think += data.thinks
     })

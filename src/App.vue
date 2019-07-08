@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <ethan-pic/>
+    <boss/>
     <stats/>
     <progressions/>
     <inventory/>
@@ -14,6 +15,7 @@ import stats from './components/stats.vue'
 import progressions from './components/progressions.vue'
 import inventory from './components/inventory.vue'
 import achievements from './components/achievements.vue'
+import boss from './components/boss.vue'
 import eventBus from './eventBus'
 
 export default {
@@ -26,7 +28,8 @@ export default {
     stats,
     progressions,
     inventory,
-    achievements
+    achievements,
+    boss,
   },
   data() {
     return {
@@ -52,7 +55,7 @@ export default {
 } */
 body {
   background-image: url('assets/backgrounds/trippy.gif');
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: 100%;
 }
 </style>
