@@ -71,6 +71,11 @@ export default {
           name: 'Organized af',
           grade: '🥉',
           desc: 'Unlocked after acquiring 150 semester schedules'
+        },
+        {
+          name: '🍁 Royal',
+          grade: '🥉',
+          desc: 'Unlocked after defeating the horny 😏 mushroom'
         }
       ]
     }

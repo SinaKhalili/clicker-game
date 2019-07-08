@@ -136,7 +136,7 @@ export default {
       ],
       clickThresholds: [100, 250, 500, 1000, 2000, 3500],
       showModal: false,
-      modalContent: '<h1> Spinny hat ethan </h1> <p> +12 😎'
+      modalContent: ' One think closer'
     }
   },
   components: {

@@ -7,7 +7,7 @@ import App from './App.vue'
 import '@/assets/global.css'
 
 Vue.config.productionTip = false
-Vue.use(vmodal, { dialog: true })
+Vue.use(vmodal, { dialog: true }, )
 Vue.use(Toasted)
 Vue.toasted.register(
   'achievement',
