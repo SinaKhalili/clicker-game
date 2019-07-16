@@ -57,7 +57,7 @@ export default {
   margin-top: 60px;
 } */
 body {
-  background-image: url('assets/backgrounds/vapor.gif');
+  background-image: url('assets/backgrounds/trippy.gif');
   background-repeat: repeat;
   background-size: 100%;
 }

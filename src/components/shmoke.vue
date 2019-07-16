@@ -1,5 +1,5 @@
 <template>
-<div id='s' class="fl ma2 tc b--solid bg-light-green shadow-5 db pa3"> 
+<div id='s' class="fl ma2 tc b--solid bg-green shadow-5 db pa3"> 
         <h2>🌲 SHMOKE up FELLA 🌲 </h2>
         <img class="snoop" @click="shmoke_weed"  :src = getimageUrl() />
 </div>     
@@ -8,7 +8,6 @@
 
 
 <script>
-import { METHODS } from 'http';
 import eventBus from '../eventBus';
 export default {
     data(){
@@ -21,9 +20,9 @@ export default {
                 eventBus.$emit('achievement-unlocked' , 'We only smoke quads')
                 eventBus.$emit('big-kush-energy')
                 this.$modal.show('dialog', {
-              title: `<h1> SHMOKING GANJA BIG BOI , ENJOY A 30 🍆 BOOST </h1>`,
+              title: `<h1> SHMOKING GANJA BIG BOI , ENJOY A 20 🍆 BOOST </h1>`,
               buttons:[{
-                  title: "puff puff 🅱IGGA"
+                  title: "puff puff 🅱A🅱Y"
               }]
                 }) 
             }
@@ -46,17 +45,6 @@ export default {
 
         shmoke_weed() {
             this.shmoke[0].run()
-            var smoke_screem = document.getElementsByClassName('toking')
-            var shmokie = document.getElementsByClassName('swed')
-            var promise = shmokie[0].play();
-
-            if (promise !== undefined) {
-                    promise.then(function() {
-                    // Automatic playback started!
-                }).catch(function(error) {
-                    console.log(error)
-            });
-          }
         }
     }
 
@@ -71,13 +59,17 @@ export default {
     #s{
         height: 450px;
         width: 300px;
-
+        transition: background-image  1s  ease-in-out;
+    }
+    #s:hover{
+        background-image: url('../assets/items/smoke.gif');
     }
     .snoop{
         height:auto;
         width:auto;
         max-height:300px;
         max-width: 400px;
+        opacity:1;
 
     }
     
