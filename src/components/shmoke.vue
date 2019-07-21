@@ -9,6 +9,7 @@
 
 <script>
 import eventBus from '../eventBus';
+import { setTimeout } from 'timers';
 export default {
     data(){
         return {
@@ -16,6 +17,7 @@ export default {
                 {
             shmoked:true, 
             name:"shmokie",
+            joints:0,
             run: () => {
                 eventBus.$emit('achievement-unlocked' , 'We only smoke quads')
                 eventBus.$emit('big-kush-energy')
@@ -42,9 +44,25 @@ export default {
         getimageUrl() {
             return require('../assets/items/tenor.gif')
         },
+        reset_joints(){
+            this.shmoke[0].joints = 0;
+        },
 
         shmoke_weed() {
-            this.shmoke[0].run()
+            if(this.shmoke[0].joints > 4 )
+            {
+            this.$modal.show('dialog', {
+              title: `<h1>😤 SORRY THICKBOI , Youre all out of Js 😤</h1>`,
+              buttons:[{
+                  title: "puff puff 🅱A🅱Y"
+                    }]
+                }) 
+                setTimeout(reset_joints, 30000);
+            }
+            else{
+                this.shmoke[0].joints += 1;
+                this.shmoke[0].run()
+            }
         }
     }
 
