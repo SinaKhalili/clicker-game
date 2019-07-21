@@ -1,7 +1,7 @@
 <template>
 <div id='s' class="fl ma2 tc b--solid bg-green shadow-5 db pa3"> 
         <h2>🌲 SHMOKE up FELLA 🌲 </h2>
-        <img class="snoop" @click="shmoke_weed"  :src = getimageUrl() />
+        <img class="snoop pointer grow" @click="shmoke_weed"  :src = getimageUrl() />
 </div>     
 
 </template>
@@ -13,7 +13,7 @@ import { setTimeout } from 'timers';
 export default {
     data(){
         return {
-            shmoking: [
+            shmoking: 
                 {
             shmoked:true, 
             name:"shmokie",
@@ -29,7 +29,6 @@ export default {
                 }) 
             }
                 }
-            ]
         }
     },
     computed:{
@@ -45,11 +44,11 @@ export default {
             return require('../assets/items/tenor.gif')
         },
         reset_joints(){
-            this.shmoke[0].joints = 0;
+            this.shmoke.joints = 0;
         },
 
         shmoke_weed() {
-            if(this.shmoke[0].joints > 4 )
+            if(this.shmoke.joints > 4 )
             {
             this.$modal.show('dialog', {
               title: `<h1>😤 SORRY THICKBOI , Youre all out of Js 😤</h1>`,
@@ -57,11 +56,11 @@ export default {
                   title: "puff puff 🅱A🅱Y"
                     }]
                 }) 
-                setTimeout(reset_joints, 30000);
+                setTimeout(this.reset_joints, 30000);
             }
             else{
-                this.shmoke[0].joints += 1;
-                this.shmoke[0].run()
+                this.shmoke.joints += 1;
+                this.shmoke.run()
             }
         }
     }
@@ -89,14 +88,6 @@ export default {
         max-width: 400px;
         opacity:1;
 
-    }
-    
-    img:hover{ 
-        animation-name: pulse_animation;
-        animation-duration: 800ms;
-        transform-origin: 70% 70%;
-        animation-iteration-count:infinite;
-        animation-timing-function: ease-in-out;
     }
     
 
