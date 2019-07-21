@@ -51,11 +51,6 @@ export default {
           desc: 'Unlocked when defeating sub-zero'
         },
         {
-          name: 'We only smoke quads',
-          grade: '🥉',
-          desc: 'Unlocked when seshin a quadro'
-        },
-        {
           name: 'Not even a platformer',
           grade: '🥉',
           desc: 'Unlocked when being lazy and making an idle clicker game'
@@ -76,6 +71,11 @@ export default {
           name: '🍁 Royal',
           grade: '🥉',
           desc: 'Unlocked after defeating the horny 😏 mushroom'
+        },
+        {
+          name: 'We only smoke quads',
+          grade: '🥉',
+          desc: 'Unlocked when seshin a quadro'
         }
       ]
     }

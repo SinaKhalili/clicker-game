@@ -36,6 +36,10 @@ export default {
     eventBus.$on('think-click', data => {
       this.think += data.thinks
     })
+
+    eventBus.$on('big-kush-energy' ,  data => {
+      this.energy+= 20;
+    })
     eventBus.$on('game-tick', data => {
       // Store previous context
 
@@ -46,7 +50,7 @@ export default {
       this.thinkClass = this.prev_think == this.think ? 'f1 pulse' : 'f1 pulse'
       this.moneyClass = this.prev_money == this.money ? 'f1 pulse' : 'f1 pulse'
       this.energyClass =
-        this.prev_energy == this.energy ? 'f1 pulse' : 'f1 pulse'
+      this.prev_energy == this.energy ? 'f1 pulse' : 'f1 pulse'
 
       this.prev_think = this.think
       this.prev_cool = this.cool

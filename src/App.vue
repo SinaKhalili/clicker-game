@@ -2,10 +2,11 @@
   <div id="app">
     <ethan-pic/>
     <boss/>
-    <stats/>
-    <progressions/>
-    <inventory/>
     <achievements v-show="achievements"/>
+    <progressions/>
+    <stats/>
+    <shmoke/>
+    <inventory/>
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import inventory from './components/inventory.vue'
 import achievements from './components/achievements.vue'
 import boss from './components/boss.vue'
 import eventBus from './eventBus'
+import shmoke from './components/shmoke'
 
 export default {
   name: 'app',
@@ -30,6 +32,7 @@ export default {
     inventory,
     achievements,
     boss,
+    shmoke
   },
   data() {
     return {

@@ -65,6 +65,16 @@ export default {
           image: 'dabbing_ethan.jpg',
           adder: 5,
           multiplier: 1
+        },
+          {
+          name: 'Beedie ethan',
+          rarity: 'shiny + ',
+          effect: ' +90 🤔 per click',
+          desc:
+            'This very cool ethan will dab on every hater before finishing them off swiftly in a game of fortnite',
+          image: 'ethan_beedie.jpg',
+          adder: 90,
+          multiplier: 1
         }
       ],
       viewAllEthans: false,
