@@ -74,7 +74,16 @@ export default {
           }
         },
         {
-          name: 'kirby with feet'
+          name: 'SANS UNDERTALE',
+          max_health: 100,
+          current_health: 100,
+          damage_per_tick: 1,
+          image: 'sans_undertale.png',
+          death_image: 'sans_undertale.png',
+          run: () => {
+            alert('please add sans undertale')
+          }
+
         },
         {
           name: 'Light TURNER'

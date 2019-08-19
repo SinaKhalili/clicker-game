@@ -1,8 +1,8 @@
 <template>
 <div id='s' class="fl ma2 tc b--solid bg-green shadow-5 db pa3"> 
         <h2>🌲 SHMOKE up FELLA 🌲 </h2>
-        <img class="snoop" @click="shmoke_weed"  :src = getimageUrl() />
-</div>     
+        <img class="snoop pointer grow" @click="shmoke_weed"  :src = getimageUrl() />
+</div>
 
 </template>
 
@@ -14,7 +14,7 @@ export default {
         return {
             shmoking: [
                 {
-            shmoked:true, 
+            shmoked:true,
             name:"shmokie",
             run: () => {
                 eventBus.$emit('achievement-unlocked' , 'We only smoke quads')
@@ -24,7 +24,7 @@ export default {
               buttons:[{
                   title: "puff puff 🅱A🅱Y"
               }]
-                }) 
+                })
             }
                 }
             ]
@@ -36,19 +36,13 @@ export default {
         }
     },
     methods:{
-        getsoundUrl(){
-            return require('../assets/items/shmoke.mp3');
-        },
         getimageUrl() {
             return require('../assets/items/tenor.gif')
         },
-
         shmoke_weed() {
             this.shmoke[0].run()
         }
     }
-
-    
 }
 </script>
 
@@ -72,7 +66,7 @@ export default {
         opacity:1;
 
     }
-    
+/*     
     img:hover{ 
         animation-name: pulse_animation;
         animation-duration: 800ms;
@@ -80,6 +74,6 @@ export default {
         animation-iteration-count:infinite;
         animation-timing-function: ease-in-out;
     }
-    
+     */
 
 </style>
