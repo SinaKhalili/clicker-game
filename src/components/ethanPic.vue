@@ -42,20 +42,21 @@ export default {
   },
   mounted() {
     this.$modal.show('dialog', {
-      title: "Let's play a game",
-      text: "It's an idle clicker",
+      title: "Let's play a game...",
+      text:
+        "And I know your favourite genre, that's right, it's an idle clicker game.",
       buttons: [
         {
-          title: 'Close',
+          title: 'IAMDISSAPOINT',
           handler: () => {
-            alert('Woot!')
+            alert(
+              "fair - but listen, it does have some pretty solid references AND it's really overdone.\
+               It might just be the most ethan game of all time."
+            )
           }
         },
         {
-          title: 'Actual close',
-          handler: () => {
-            alert('Just kidding also woot')
-          }
+          title: "Let's see what ya got, boy"
         }
       ]
     }),
