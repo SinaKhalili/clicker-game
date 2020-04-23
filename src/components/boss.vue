@@ -1,37 +1,33 @@
 <template>
   <div class="fl ma2 tc b--solid bg-light-green shadow-5 db pa3">
-  <h2> ⚔️ Battle! ⚔️ </h2>
-  <h1> {{ current_enemy.name }} </h1>
+    <h2>⚔️ Battle! ⚔️</h2>
+    <h1>{{ current_enemy.name }}</h1>
 
-  <!-- enemy image -->
-  <img class="f1 unselectable grow"
-        @click="attackEnemy" :src="getImageUrl()"/>
+    <!-- enemy image -->
+    <img class="f1 unselectable grow" @click="attackEnemy" :src="getImageUrl()" />
 
-  <!-- enemy health (number and health bar) -->
-  <p>Health : {{ current_enemy.current_health }} / {{ current_enemy.max_health }}</p>
-  <!-- bag health -->
-  <div id="enemy-health">
-    <div :style="{ width: health_bar_width + '%' }"></div>
+    <!-- enemy health (number and health bar) -->
+    <p>Health : {{ current_enemy.current_health }} / {{ current_enemy.max_health }}</p>
+    <!-- bag health -->
+    <div id="enemy-health">
+      <div :style="{ width: health_bar_width + '%' }"></div>
+    </div>
+
+    <button v-show="current_enemy.dead" class="pointer">LOOT</button>
+    <button v-show="current_enemy.dead" class="pointer red" @click="next_battle">Begin Next Battle</button>
   </div>
-
-  <button v-show="current_enemy.dead" class="pointer"> LOOT </button>
-  <button v-show="current_enemy.dead" class="pointer red" @click="next_battle"> Begin Next Battle </button>
-
-
-  </div>
-
 </template>
 
 <script>
-import eventBus from '../eventBus';
+import eventBus from '../eventBus'
 
 export default {
-  mounted () {
+  mounted() {
     eventBus.$on('game-tick', data => {
-      if(this.active && !this.current_enemy.dead){
+      if (this.active && !this.current_enemy.dead) {
         eventBus.$emit('enemy-attack', this.current_enemy)
       }
-    });
+    })
   },
   data() {
     return {
@@ -56,7 +52,7 @@ export default {
                 {
                   title: 'Ok cool, also your tutorial is shit'
                 }
-              ],
+              ]
             })
           }
         },
@@ -85,7 +81,7 @@ export default {
           name: 'Ultimate Ethan'
         },
         {
-          name: 'Me and I\'m litterally allowed to cheat'
+          name: "Me and I'm litterally allowed to cheat"
           // Macbeth narrator picture
         },
         {
@@ -108,35 +104,37 @@ export default {
         },
         {
           name: 'SANS UNDERTALE'
-        },
+        }
       ],
       active: true,
       player_attack: 1,
-      enemy_level: 0,
+      enemy_level: 0
     }
   },
   computed: {
     health_bar_width() {
-      return this.current_enemy.current_health / this.current_enemy.max_health * 100
+      return (
+        (this.current_enemy.current_health / this.current_enemy.max_health) *
+        100
+      )
     },
-    current_enemy(){
+    current_enemy() {
       return this.all_enemies[this.enemy_level]
     }
   },
   methods: {
     getImageUrl() {
-      if(this.current_enemy.dead){
+      if (this.current_enemy.dead) {
         return require('../assets/enemies/' + this.current_enemy.death_image)
       }
       return require('../assets/enemies/' + this.current_enemy.image)
     },
     attackEnemy() {
-      if (this.current_enemy.current_health - this.player_attack <= 0){
+      if (this.current_enemy.current_health - this.player_attack <= 0) {
         this.current_enemy.current_health = 0
         this.current_enemy.dead = true
         this.current_enemy.run()
-      }
-      else{
+      } else {
         this.current_enemy.current_health -= this.player_attack
       }
     },
@@ -149,10 +147,10 @@ export default {
 
 <style>
 img {
-    height: auto;
-    width: auto;
-    max-width: 200px;
-    max-height: 300px;
+  height: auto;
+  width: auto;
+  max-width: 200px;
+  max-height: 300px;
 }
 #enemy-health {
   width: 200px;
@@ -164,7 +162,7 @@ img {
   height: 20px;
   background: crimson;
 }
-button{
+button {
   background-color: rgb(255, 237, 104); /* Green */
   border: none;
   color: rgb(0, 0, 0);
@@ -174,7 +172,7 @@ button{
   display: inline-block;
   font-size: 16px;
 }
-button:hover{
+button:hover {
   background-color: #ff8c00; /* Green */
   border: none;
   color: white;

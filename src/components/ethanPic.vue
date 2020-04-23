@@ -1,6 +1,6 @@
 <template>
   <div class="fl ma2 tc b--solid bg-light-red shadow-5 dib pa3">
-    <v-dialog/>
+    <v-dialog />
     <h3 class="helvetica">Ethan Level : {{ ethanLevel }}</h3>
     <blockquote class="athelas mw5 ml0 mt0 pl4 black-90 bl bw2 b--blue">{{ ethanQuotes[1]}}</blockquote>
     <div class="db mb1">
@@ -10,7 +10,7 @@
         href="#0"
       >🤔</a>
     </div>
-    <img class="mw5" :src="getImageUrl()">
+    <img class="mw5" :src="getImageUrl()" />
     <p>Current Ethan:</p>
     <div class="tl code mw5">
       <p>Name : {{ currEthan.name }}</p>
@@ -65,9 +65,7 @@ export default {
           if (this.cummulativeThink >= this.clickThresholds[num]) {
             EventBus.$emit(
               'send-modal',
-              `<h1> Spinny hat ethan </h1> <p> congrats on ${
-                this.clickThresholds[num]
-              } clicks! </p>`
+              `<h1> Spinny hat ethan </h1> <p> congrats on ${this.clickThresholds[num]} clicks! </p>`
             )
             this.clickThresholds.splice(num, 1)
           }

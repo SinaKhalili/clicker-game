@@ -1,7 +1,7 @@
 <template>
   <div class="fl ma2 tc b--solid bg-light-yellow shadow-5 db pa3">
     <h2>Achievements 🏆</h2>
-    <hr class="mw3 bb bw1 b--black-10">
+    <hr class="mw3 bb bw1 b--black-10" />
     <ul class="list pl0 ml0 tl mw5 ba b--black br0">
       <li
         v-for="achievement in recentAchievements"

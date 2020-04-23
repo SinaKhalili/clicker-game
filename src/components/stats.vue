@@ -26,10 +26,9 @@ import { setTimeout, setInterval } from 'timers'
 export default {
   mounted() {
     eventBus.$on('enemy-attack', data => {
-      if( this.energy - data.damage_per_tick > 0){
+      if (this.energy - data.damage_per_tick > 0) {
         this.energy -= data.damage_per_tick
-      }
-      else{
+      } else {
         alert('Thou art dead')
       }
     })
@@ -37,8 +36,8 @@ export default {
       this.think += data.thinks
     })
 
-    eventBus.$on('big-kush-energy' ,  data => {
-      this.energy+= 20;
+    eventBus.$on('big-kush-energy', data => {
+      this.energy += 20
     })
     eventBus.$on('game-tick', data => {
       // Store previous context
@@ -50,7 +49,7 @@ export default {
       this.thinkClass = this.prev_think == this.think ? 'f1 pulse' : 'f1 pulse'
       this.moneyClass = this.prev_money == this.money ? 'f1 pulse' : 'f1 pulse'
       this.energyClass =
-      this.prev_energy == this.energy ? 'f1 pulse' : 'f1 pulse'
+        this.prev_energy == this.energy ? 'f1 pulse' : 'f1 pulse'
 
       this.prev_think = this.think
       this.prev_cool = this.cool

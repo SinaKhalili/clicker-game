@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <ethan-pic/>
-    <stats/>
-    <inventory/>
-    <boss/>
-    <progressions/>
-    <achievements v-show="achievements"/>
-    <shmoke/>
+    <ethan-pic />
+    <stats />
+    <inventory />
+    <boss />
+    <progressions />
+    <achievements v-show="achievements" />
+    <shmoke />
   </div>
 </template>
 

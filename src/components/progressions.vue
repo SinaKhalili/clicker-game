@@ -8,7 +8,7 @@
       >
         <div class="tc">
           <h1 class="f4 pa1">{{ item.name }}</h1>
-          <hr class="mw3 bb bw1 b--black-10">
+          <hr class="mw3 bb bw1 b--black-10" />
         </div>
         <p class="lh-copy measure center f6 black-70">{{ item.desc}}</p>
         <blockquote>{{ item.effect }}</blockquote>

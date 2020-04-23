@@ -66,7 +66,7 @@ export default {
           adder: 5,
           multiplier: 1
         },
-          {
+        {
           name: 'Beedie ethan',
           rarity: 'shiny + ',
           effect: ' +90 🤔 per click',

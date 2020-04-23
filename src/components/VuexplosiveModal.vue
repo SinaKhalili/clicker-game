@@ -29,7 +29,7 @@
 
     <div class="vuexplosive-modal-bg">
       <!-- @click="modalToggle"> -->
-      <img class="vuexplosive-modal-explosion-gif" :src="active ? explosionGifUrl : '' ">
+      <img class="vuexplosive-modal-explosion-gif" :src="active ? explosionGifUrl : '' " />
     </div>
   </div>
 </template>
