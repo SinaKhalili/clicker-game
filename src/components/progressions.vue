@@ -10,9 +10,9 @@
           <h1 class="f4 pa1">{{ item.name }}</h1>
           <hr class="mw3 bb bw1 b--black-10" />
         </div>
-        <p class="lh-copy measure center f6 black-70">{{ item.desc}}</p>
+        <p class="lh-copy measure center f6 black-70">{{ item.desc }}</p>
         <blockquote>{{ item.effect }}</blockquote>
-        <p class="tl pl2 code">Cost : {{ item.price}} {{item.unit}}</p>
+        <p class="tl pl2 code">Cost : {{ item.price }} {{ item.unit }}</p>
       </article>
     </a>
   </div>
@@ -56,7 +56,12 @@ export default {
           effect: ' +12 😎',
           price: 4,
           unit: `🤔`,
-          owned: 0
+          owned: 0,
+          run: a => {
+            if (a.owned === 50) {
+              eventBus.$emit('ethan-unlocked', 'SUSLANDO ETHAN JSON OBJECT')
+            }
+          }
         }
       ],
       units: {
@@ -80,5 +85,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

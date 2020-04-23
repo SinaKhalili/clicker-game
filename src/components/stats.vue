@@ -21,7 +21,7 @@ export default {
       if (this.energy - data.damage_per_tick > 0) {
         this.energy -= data.damage_per_tick
       } else {
-        alert('Thou art dead')
+        this.energy = 0
       }
     })
     eventBus.$on('think-click', data => {
@@ -33,6 +33,19 @@ export default {
     })
     eventBus.$on('game-tick', data => {
       // Store previous context
+
+      if (this.energy == 0) {
+        alert(
+          'gameover - close this tab and come back to play again (closing this will open it again)'
+        )
+      }
+      if (this.think == 0) {
+        if (data.tickFlux < 0) {
+          this.energy += data.tickFlux
+        } else {
+          this.energe -= 1
+        }
+      }
 
       this.think =
         this.think + data.tickFlux > 0 ? this.think + data.tickFlux : 0
@@ -70,8 +83,8 @@ export default {
       moneyClass: 'f1',
       energyClass: 'f1',
       think: 0,
-      cool: 1,
-      money: 20,
+      cool: 0,
+      money: 0,
       energy: 69,
       prev_think: 0,
       prev_cool: 1,
@@ -105,7 +118,7 @@ export default {
           cls: this.moneyClass
         },
         energy: {
-          disp: `${d} 🍆`,
+          disp: `${d.toFixed(2)} 🍆`,
           cls: this.energyClass
         }
       }

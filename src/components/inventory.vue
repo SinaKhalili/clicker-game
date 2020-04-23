@@ -72,9 +72,9 @@ export default {
           name: 'Beedie ethan',
           rarity: 'shiny + ',
           effect: ' +90 🤔 per click',
-          desc: 'Default starter ethan, no bonuses. Quite a neat dude though.',
+          desc: 'Default starter ethan. Neat dude.',
           image: 'ethan_beedie.jpg',
-          adder: 90,
+          adder: 0,
           multiplier: 1
         }
       ],

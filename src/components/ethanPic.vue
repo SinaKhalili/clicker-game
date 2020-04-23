@@ -1,7 +1,7 @@
 <template>
   <div class="fl ma2 tc b--solid bg-light-red shadow-5 dib pa3">
     <v-dialog />
-    <h3 class="helvetica">Ethan Level : {{ ethanLevel }}</h3>
+    <h3 class="helvetica">Ethan Level : {{ currLevel }}</h3>
     <blockquote class="athelas mw5 ml0 mt0 pl4 black-90 bl bw2 b--blue">
       {{ ethanQuotes[currQuote] }}
     </blockquote>
@@ -117,7 +117,7 @@ export default {
         name: 'Beedie ethan',
         rarity: 'regular',
         effect: ' None',
-        desc: 'Default starter ethan, no bonuses. Quite a neat dude though.',
+        desc: 'Default starter ethan. Neat dude.',
         image: 'ethan_beedie.jpg',
         adder: 0,
         multiplier: 1,
@@ -137,7 +137,7 @@ export default {
         50,
       ],
       currLevel: 0,
-      clickThresholds: [10, 250, 500, 1000, 2000, 3500],
+      clickThresholds: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       showModal: false,
       modalContent: ' One think closer',
     }
@@ -146,9 +146,6 @@ export default {
     VuexplosiveModal,
   },
   computed: {
-    ethanLevel() {
-      return this.levels.filter((num) => num < this.cummulativeThink).length
-    },
     ethanClickMultipliers() {
       return this.currEthan.multiplier
     },

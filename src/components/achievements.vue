@@ -13,7 +13,9 @@
         <div class="dib f3 w-10">{{ achievement.grade }}</div>
       </li>
     </ul>
-    <a @click="viewAchievements()" href="#" class="tl">{{showAchievements}}</a>
+    <a @click="viewAchievements()" href="#" class="tl">{{
+      showAchievements
+    }}</a>
   </div>
 </template>
 
@@ -22,6 +24,7 @@ import eventBus from '../eventBus'
 export default {
   mounted() {
     eventBus.$on('achievement-unlocked', data => {
+      console.log(data)
       for (let i = 0; i < this.locked_achievements.length; i++) {
         if (this.locked_achievements[i].name === data) {
           this.unlocked_achievements.unshift(this.locked_achievements[i])
@@ -34,11 +37,19 @@ export default {
   data() {
     return {
       viewAllAchievements: false,
-      unlocked_achievements: [
+      unlocked_achievements: [],
+      locked_achievements: [
+        {
+          name: 'Clickety clackety this is my property',
+          grade: '🥉',
+          desc:
+            'Unlocked after the first noticably uncomfortable amount clicks clicked.'
+        },
         {
           name: 'Achievement unlocked',
           grade: '🥉',
-          desc: 'Achievement unclocked when unlocking an achievement'
+          desc:
+            'Achievement unlocked when unlocking an achievement. Not to be confused with "Achievement menu Unlocked"'
         },
         {
           name: 'Please add sans undertale',
@@ -48,7 +59,7 @@ export default {
         {
           name: 'Call me sonicfox9k',
           grade: '🥉',
-          desc: 'Unlocked when defeating sub-zero'
+          desc: 'Unlocked when defeating sub-zero. Like that one Furry guy.'
         },
         {
           name: 'Not even a platformer',
@@ -59,9 +70,7 @@ export default {
           name: 'Lookin ass',
           grade: '🥉',
           desc: 'Unlocked when eating ahs'
-        }
-      ],
-      locked_achievements: [
+        },
         {
           name: 'Organized af',
           grade: '🥉',
@@ -110,5 +119,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

@@ -1,11 +1,11 @@
 <template>
   <div id="app" v-bind:style="{ backgroundImage: curr_bg }">
     <ethan-pic />
+    <achievements v-if="achievements" />
     <stats v-show="stats" />
     <inventory v-if="inventory" />
-    <boss v-if="boss" />
     <progressions v-if="progressions" />
-    <achievements v-if="achievements" />
+    <boss v-if="boss" />
     <shmoke v-if="shmoke" />
 
     <VuexplosiveModal
@@ -61,15 +61,26 @@ export default {
   mounted() {
     EventBus.$on('level-up', (data) => {
       // maybe map this to get rid of these gross if statements?
-      if (data > 0) {
+      if (data > 0 && !this.achievements) {
         this.achievements = true
+
+        this.explainAchievements()
       }
-      if (data > 2) {
+      if (data > 1) {
+        EventBus.$emit(
+          'achievement-unlocked',
+          'Clickety clackety this is my property'
+        )
+        EventBus.$emit('achievement-unlocked', 'Achievement unlocked')
+      }
+      if (data > 2 && !this.stats) {
         this.stats = true
+        this.explainStats()
       }
       if (data > 4) {
         this.inventory = true
         this.progressions = true
+        this.explainInventory()
       }
       if (data > 6) {
         this.boss = true
@@ -87,6 +98,68 @@ export default {
   methods: {
     toggleModal() {
       this.showModal = !this.showModal
+    },
+    explainAchievements() {
+      this.$modal.show('dialog', {
+        title: 'Menu unlocked! - Achievements',
+        text: `The more you play, the more stuff you unlock (yea I spent a lot of time this lol)
+          You just unlocked the ability to get achievements! These are pretty self-explanatory.`,
+        buttons: [
+          {
+            title: 'Cool',
+          },
+        ],
+      })
+    },
+    explainStats() {
+      this.$modal.show('dialog', {
+        title: 'Menu unlocked! - Stats',
+        text: `Ok these are pretty substantial.
+        </br>
+        Think (🤔)- is the <strong>ultimate</strong> unit of this game (and also some would argue life?)
+        </br>
+        </br>
+        For every second you are alive, you pay some price in think.
+        </br>
+        </br>
+        Once your think runs out, you start losing energy (🍆)
+        </br>
+        </br>
+        IF YOU LOSE all of your energy, you lose the game.
+        Restart from scratch. Do not pass go, do not collect 200 dollars.
+        </br>
+        </br>
+        However your "accrued thought" never goes down, and that is what determines level, which is the goal of the game -
+        well acutally the goal of the game is super ethan simulation, but this is close enough.
+        </br>
+        Money and cool can be discovered by the player (this message is already super long and you've been losing think this whole time)
+        `,
+        buttons: [
+          {
+            title: 'Cool',
+          },
+        ],
+      })
+    },
+    explainInventory() {
+      this.$modal.show('dialog', {
+        title: 'Menus(menues?) unlocked! - Inventory and Progressions',
+        text: `Inventory is what you have, you can view how many you have or interact with items.
+        </br>
+        </br>
+        Progressions are things you can buy! Some things you can buy many times
+        (despite not making sense to buy that thing multiple times in real life)
+        also despite what you may have thought "money" was, you actually buy them
+        in think or sometimes cool
+        </br>
+        </br>
+        `,
+        buttons: [
+          {
+            title: 'Aight',
+          },
+        ],
+      })
     },
   },
 }
