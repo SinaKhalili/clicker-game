@@ -9,18 +9,10 @@
         <td :class="att.cls">{{ att.disp }}</td>
       </tr>
     </table>
-    <VuexplosiveModal
-      :visible="showModal"
-      title=" 🔥 LEVEL UP! 🔥 "
-      :content="modalContent"
-      footer="Your ETHAN LEVEL has INCREASED"
-    ></VuexplosiveModal>
   </div>
 </template>
 
 <script>
-import VuexplosiveModal from './VuexplosiveModal'
-
 import eventBus from '../eventBus'
 import { setTimeout, setInterval } from 'timers'
 export default {
@@ -29,7 +21,7 @@ export default {
       if (this.energy - data.damage_per_tick > 0) {
         this.energy -= data.damage_per_tick
       } else {
-        alert('Thou art dead')
+        this.energy = 0
       }
     })
     eventBus.$on('think-click', data => {
@@ -41,6 +33,19 @@ export default {
     })
     eventBus.$on('game-tick', data => {
       // Store previous context
+
+      if (this.energy == 0) {
+        alert(
+          'gameover - close this tab and come back to play again (closing this will open it again)'
+        )
+      }
+      if (this.think == 0) {
+        if (data.tickFlux < 0) {
+          this.energy += data.tickFlux
+        } else {
+          this.energe -= 1
+        }
+      }
 
       this.think =
         this.think + data.tickFlux > 0 ? this.think + data.tickFlux : 0
@@ -55,10 +60,6 @@ export default {
       this.prev_cool = this.cool
       this.prev_money = this.money
       this.prev_energy = this.energy
-    })
-    eventBus.$on('send-modal', data => {
-      this.modalContent = data
-      this.toggleModal()
     })
     eventBus.$on('buy-item', data => {
       let unit = this.units[data.unit]
@@ -82,15 +83,13 @@ export default {
       moneyClass: 'f1',
       energyClass: 'f1',
       think: 0,
-      cool: 1,
-      money: 20,
+      cool: 0,
+      money: 0,
       energy: 69,
       prev_think: 0,
       prev_cool: 1,
       prev_money: 20,
       prev_energy: 69,
-      showModal: false,
-      modalContent: '<h1> Spinny hat ethan </h1> <p> +12 😎',
       clickThresholds: [10, 50, 100, 250, 500, 1000, 2000, 3500],
       units: {
         '🤔': 'think',
@@ -119,19 +118,13 @@ export default {
           cls: this.moneyClass
         },
         energy: {
-          disp: `${d} 🍆`,
+          disp: `${d.toFixed(2)} 🍆`,
           cls: this.energyClass
         }
       }
     }
   },
-  components: {
-    VuexplosiveModal
-  },
   methods: {
-    toggleModal() {
-      this.showModal = !this.showModal
-    },
     toggleThinkGrow() {
       this.toggleThink = this.toggleThink == 'grow' ? ' ' : 'grow'
     }

@@ -1,7 +1,10 @@
 <template>
   <div
     class="vuexplosive-modal"
-    :class="{'vuexplosive-modal-hidden': !active, 'vuexplosive-modal-visible': active}"
+    :class="{
+      'vuexplosive-modal-hidden': !active,
+      'vuexplosive-modal-visible': active
+    }"
     @keydown.esc="modalToggle"
     :aria-hidden="!active"
     tabindex="-1"
@@ -11,7 +14,7 @@
       <div class="vuexplosive-modal-container" v-if="active">
         <div class="vuexplosive-modal-inner">
           <div class="vuexplosive-modal-header">
-            <h2 class="vuexplosive-modal-title">{{title}}</h2>
+            <h2 class="vuexplosive-modal-title">{{ title }}</h2>
             <button
               class="vuexplosive-modal-close"
               @click="modalToggle"
@@ -29,11 +32,13 @@
 
     <div class="vuexplosive-modal-bg">
       <!-- @click="modalToggle"> -->
-      <img class="vuexplosive-modal-explosion-gif" :src="active ? explosionGifUrl : '' " />
+      <img
+        class="vuexplosive-modal-explosion-gif"
+        :src="active ? explosionGifUrl : ''"
+      />
     </div>
   </div>
 </template>
-
 
 <script>
 /* eslint-disable */
@@ -76,7 +81,6 @@ export default {
   }
 }
 </script>
-
 
 <style scoped>
 .vuexplosive-modal {
