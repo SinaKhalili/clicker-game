@@ -9,18 +9,10 @@
         <td :class="att.cls">{{ att.disp }}</td>
       </tr>
     </table>
-    <VuexplosiveModal
-      :visible="showModal"
-      title=" 🔥 LEVEL UP! 🔥 "
-      :content="modalContent"
-      footer="Your ETHAN LEVEL has INCREASED"
-    ></VuexplosiveModal>
   </div>
 </template>
 
 <script>
-import VuexplosiveModal from './VuexplosiveModal'
-
 import eventBus from '../eventBus'
 import { setTimeout, setInterval } from 'timers'
 export default {
@@ -56,10 +48,6 @@ export default {
       this.prev_money = this.money
       this.prev_energy = this.energy
     })
-    eventBus.$on('send-modal', data => {
-      this.modalContent = data
-      this.toggleModal()
-    })
     eventBus.$on('buy-item', data => {
       let unit = this.units[data.unit]
       if (this[unit] - data.price >= 0) {
@@ -89,8 +77,6 @@ export default {
       prev_cool: 1,
       prev_money: 20,
       prev_energy: 69,
-      showModal: false,
-      modalContent: '<h1> Spinny hat ethan </h1> <p> +12 😎',
       clickThresholds: [10, 50, 100, 250, 500, 1000, 2000, 3500],
       units: {
         '🤔': 'think',
@@ -125,13 +111,7 @@ export default {
       }
     }
   },
-  components: {
-    VuexplosiveModal
-  },
   methods: {
-    toggleModal() {
-      this.showModal = !this.showModal
-    },
     toggleThinkGrow() {
       this.toggleThink = this.toggleThink == 'grow' ? ' ' : 'grow'
     }

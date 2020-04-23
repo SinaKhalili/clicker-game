@@ -12,7 +12,7 @@
         <div>{{ item.name }}</div>
       </li>
     </ul>
-    <a @click="viewEthans()" href="#" class="top-0 right-0">{{showEthans}}</a>
+    <a @click="viewEthans()" href="#" class="top-0 right-0">{{ showEthans }}</a>
     <h4>Items (click for info) :</h4>
     <ul class="list pl0 ml0 center mw5 ba b--light-silver br3">
       <li
@@ -21,10 +21,12 @@
         class="pointer grow ph3 pv2 bb b--light-silver"
         @click="viewStats(item)"
       >
-        <div class="badge1" :data-badge=" ` ${item.owned} `">{{ item.name }}</div>
+        <div class="badge1" :data-badge="` ${item.owned} `">
+          {{ item.name }}
+        </div>
       </li>
     </ul>
-    <a @click="viewItems()" href="#" class="top-0 right-0">{{showItems}}</a>
+    <a @click="viewItems()" href="#" class="top-0 right-0">{{ showItems }}</a>
   </div>
 </template>
 
@@ -70,8 +72,7 @@ export default {
           name: 'Beedie ethan',
           rarity: 'shiny + ',
           effect: ' +90 🤔 per click',
-          desc:
-            'This very cool ethan will dab on every hater before finishing them off swiftly in a game of fortnite',
+          desc: 'Default starter ethan, no bonuses. Quite a neat dude though.',
           image: 'ethan_beedie.jpg',
           adder: 90,
           multiplier: 1
