@@ -108,16 +108,13 @@ export default {
       ],
       cummulativeThink: 0,
       currEthan: {
-        name: 'INFINITE ETHAN',
-        rarity: '♾',
-        effect: ' +50,000 🤔 per click and +10,000% 🤔 production',
-        desc: `IN YOUR SEARCH FOR THE ULTIMATE ETHAN YOU HAVE COME UPON A RESOLUTION.
-            THERE WILL NEVER BE A "PERFECT" ETHAN. BUT WHAT IF TOOK ALL ETHANS ACROSS MUTLIVERSES?
-            UNBOUNDED BY THE CONTRAINTS OF SPACE AND TIME FROM ETHANS PAST, PRESENT, AND FUTURE.
-            A FRACTAL ZOOMING ETHAN SPANNING ALL TIMELINES TO RULE THEM ALL`,
-        image: 'infinite_ethan.gif',
-        adder: 50000,
-        multiplier: 100
+        name: 'Beedie ethan',
+        rarity: 'shiny + ',
+        effect: ' None',
+        desc: 'Default starter ethan. Neat dude.',
+        image: 'ethan_beedie.jpg',
+        adder: 0,
+        multiplier: 1
       },
       levels: [
         1000000,
