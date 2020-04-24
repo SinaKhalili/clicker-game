@@ -1,27 +1,28 @@
 <template>
   <div class="fl ma2 tc b--solid bg-light-red shadow-5 dib pa3">
     <v-dialog />
-    <h3 class="helvetica">Ethan Level : {{ currLevel }}</h3>
-    <blockquote class="athelas mw5 ml0 mt0 pl4 black-90 bl bw2 b--blue">
-      {{ ethanQuotes[currQuote] }}
-    </blockquote>
+    <h3 v-if="checkpoint0" class="helvetica">Ethan Level : {{ currLevel }}</h3>
+    <blockquote
+      v-if="checkpoint0"
+      class="athelas mw5 ml0 mt0 pl4 black-90 bl bw2 b--blue"
+    >{{ ethanQuotes[currQuote] }}</blockquote>
     <div class="db mb1">
       <a
         class="f1 unselectable grow no-underline br-pill ph3 pv2 mb2 dib white bg-white"
         @click="clickThink"
         href="#0"
-        >🤔</a
-      >
+      >🤔</a>
     </div>
-    <img class="mw5" :src="getImageUrl()" />
-    <p>Current Ethan:</p>
-    <div class="tl code mw5">
+    <img v-if="checkpoint1" class="mw5" :src="getImageUrl()" />
+    <p v-if="checkpoint1">Current Ethan:</p>
+    <div v-if="checkpoint1" class="tl code mw5">
       <p>Name : {{ currEthan.name }}</p>
       <p>Rarity : {{ currEthan.rarity }}</p>
       <p>Effect : {{ currEthan.effect }}</p>
       <p>Description : {{ currEthan.desc }}</p>
     </div>
-    <h3 class="code">Accrued thought: {{ cummulativeThink }}</h3>
+    <h3 class="code" v-if="accruedShow">Accrued thought: {{ cummulativeThink.toFixed(1) }}</h3>
+    <h3 class="code" v-if="accruedShow">Next level at: {{ this.clickThresholds[this.currLevel] }}</h3>
   </div>
 </template>
 
@@ -38,7 +39,7 @@ export default {
     },
     getImageUrl() {
       return require('../assets/ethans/' + this.currEthan.image)
-    },
+    }
   },
   mounted() {
     this.$modal.show('dialog', {
@@ -50,15 +51,14 @@ export default {
           title: 'IAMDISSAPOINT',
           handler: () => {
             alert(
-              `fair - but listen, it does have some pretty solid references AND it's really overdone.
-               It might just be the most ethan game of all time.`
+              `fair - but listen, it does have some pretty solid references you can think of it as art if you want.`
             )
-          },
+          }
         },
         {
-          title: "Let's see what ya got, boy",
-        },
-      ],
+          title: "Let's see what ya got, boy"
+        }
+      ]
     })
     EventBus.$on('game-tick', () => {
       if (this.cummulativeThink >= this.clickThresholds[this.currLevel]) {
@@ -72,14 +72,14 @@ export default {
         this.currLevel += 1
       }
     })
-    EventBus.$on('ethan-change', (data) => {
+    EventBus.$on('ethan-change', data => {
       this.currEthan = data
-      this.currQuote = floor(Math.random() * this.ethanQuotes.length)
+      this.currQuote = Math.floor(Math.random() * this.ethanQuotes.length)
     })
-    EventBus.$on('think-click', (data) => {
+    EventBus.$on('think-click', data => {
       this.cummulativeThink += data.thinks
     })
-    EventBus.$on('item-bought', (data) => {
+    EventBus.$on('item-bought', data => {
       //pass
       this.clickMultipliers += parseFloat(data.clickMultipliers)
         ? parseFloat(data.clickMultipliers)
@@ -95,8 +95,8 @@ export default {
   },
   data() {
     return {
-      clickMultipliers: 1,
-      clickAdders: 0,
+      clickMultipliers: 7,
+      clickAdders: 1,
       tickFlux: -0.05,
       currQuote: 0,
       ethanQuotes: [
@@ -104,23 +104,20 @@ export default {
         "Listen, traps aren't gay. The US army ... ",
         '*shakes hands*',
         '  *shakes hands, grabs elbow* ',
-        ' Yeah dude, I saw a reddit post about it ',
-      ],
-      ethanPics: [
-        'cow_cyrus.jpg',
-        'ethan_artona.jpg',
-        'ethan_beedie.jpg',
-        'dabbing_ethan.jpg',
+        ' Yeah dude, I saw a reddit post about it '
       ],
       cummulativeThink: 0,
       currEthan: {
-        name: 'Beedie ethan',
-        rarity: 'regular',
-        effect: ' None',
-        desc: 'Default starter ethan. Neat dude.',
-        image: 'ethan_beedie.jpg',
-        adder: 0,
-        multiplier: 1,
+        name: 'INFINITE ETHAN',
+        rarity: '♾',
+        effect: ' +50,000 🤔 per click and +10,000% 🤔 production',
+        desc: `IN YOUR SEARCH FOR THE ULTIMATE ETHAN YOU HAVE COME UPON A RESOLUTION.
+            THERE WILL NEVER BE A "PERFECT" ETHAN. BUT WHAT IF TOOK ALL ETHANS ACROSS MUTLIVERSES?
+            UNBOUNDED BY THE CONTRAINTS OF SPACE AND TIME FROM ETHANS PAST, PRESENT, AND FUTURE.
+            A FRACTAL ZOOMING ETHAN SPANNING ALL TIMELINES TO RULE THEM ALL`,
+        image: 'infinite_ethan.gif',
+        adder: 50000,
+        multiplier: 100
       },
       levels: [
         1000000,
@@ -134,16 +131,32 @@ export default {
         1000,
         500,
         100,
-        50,
+        50
       ],
       currLevel: 0,
-      clickThresholds: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      clickThresholds: [
+        50,
+        80,
+        150,
+        200,
+        250,
+        500,
+        1500,
+        2100,
+        3500,
+        4000,
+        6000,
+        8500,
+        15000,
+        20000,
+        50000
+      ],
       showModal: false,
-      modalContent: ' One think closer',
+      modalContent: ' One think closer'
     }
   },
   components: {
-    VuexplosiveModal,
+    VuexplosiveModal
   },
   computed: {
     ethanClickMultipliers() {
@@ -152,7 +165,16 @@ export default {
     ethanClickAdder() {
       return this.currEthan.adder
     },
-  },
+    checkpoint1() {
+      return this.cummulativeThink > 15
+    },
+    checkpoint0() {
+      return this.cummulativeThink > 10
+    },
+    accruedShow() {
+      return this.cummulativeThink > 1
+    }
+  }
 }
 </script>
 

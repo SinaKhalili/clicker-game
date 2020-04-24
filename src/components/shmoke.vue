@@ -12,13 +12,14 @@ import { setTimeout } from 'timers'
 export default {
   data() {
     return {
+      heal_bonus: 20,
       shmoking: {
         shmoked: true,
         name: 'shmokie',
         joints: 0,
         run: () => {
           eventBus.$emit('achievement-unlocked', 'We only smoke quads')
-          eventBus.$emit('big-kush-energy')
+          eventBus.$emit('big-kush-energy', this.heal_bonus)
           this.$modal.show('dialog', {
             title: `<h1> SHMOKING GANJA BIG BOI , ENJOY A 20 🍆 BOOST </h1>`,
             buttons: [

@@ -29,9 +29,105 @@ export default {
         }
       }
     })
+    eventBus.$on('level-up', data => {
+      if (data > 6) {
+        let newItem = this.notAvail.pop()
+        this.avail.unshift(newItem)
+        this.$toasted.global.unlock(newItem.name)
+      }
+    })
   },
   data() {
     return {
+      notAvail: [
+        {
+          name: 'Mind altering substances',
+          desc: 'Destroy your notion of notions',
+          effect: ' Pop twice for instant Enlightenment ',
+          price: 1337133713371337,
+          unit: `🤔`,
+          owned: 0,
+          clickAdders: '0',
+          clickMultipliers: '0.0',
+          tickFlux: 0.0,
+          image: 'substance.gif',
+          run: a => {
+            if (a.owned === 1) {
+              eventBus.$emit('ethan-unlocked', 'INFINITE ETHAN')
+            }
+          }
+        },
+        {
+          name: 'Essential oil diffuser ',
+          desc: 'Truly a healthy and scientifically backed activity',
+          effect: ' Increase max energy by 30',
+          price: 200,
+          unit: `🤔`,
+          owned: 0,
+          clickAdders: '0.00',
+          clickMultipliers: '0.0',
+          tickFlux: 0.0,
+          image: 'oil.png',
+          run: a => {
+            eventBus.$emit('upgrade-energy', 30)
+          }
+        },
+        {
+          name: 'Sous vide machine',
+          desc: 'I bought it on kickstarter',
+          effect: ' + 0.05 🤔 per click',
+          price: 50,
+          unit: `🤔`,
+          owned: 0,
+          clickAdders: '0.01',
+          clickMultipliers: '0.0',
+          tickFlux: 0.0,
+          image: 'sous_vide.png',
+          run: a => {
+            if (a.owned === 10) {
+              eventBus.$emit('achievement-unlocked', 'Bottom empty')
+            }
+          }
+        },
+        {
+          name: 'Survival Kit',
+          desc: 'Just got a new knife guys',
+          effect: ' + 0.01 Player attack! ',
+          price: 200,
+          unit: `🤔`,
+          owned: 0,
+          clickAdders: '0.01',
+          clickMultipliers: '0.0',
+          tickFlux: 0.0,
+          image: 'sous_vide.png',
+          run: a => {
+            eventBus.$emit('attack-upgrade', 0.01)
+            if (a.owned === 10) {
+              eventBus.$emit('ethan-unlocked', 'artona ethan')
+            }
+            if (a.owned === 500) {
+              eventBus.$emit('achievement-unlocked', 'Ill cut you')
+            }
+          }
+        },
+        {
+          name: 'Flex jeans',
+          desc: 'Do you do parkour?',
+          effect: ' + 0.03 🤔 per second',
+          price: 13,
+          unit: `🤔`,
+          owned: 0,
+          clickAdders: '0',
+          clickMultipliers: '0.0',
+          tickFlux: 0.03,
+          image: 'flex_jeans.jpg',
+          run: a => {
+            if (a.owned === 10) {
+              eventBus.$emit('achievement-unlocked', 'CraNezy Canadian Clicker')
+            }
+          }
+        }
+      ],
       avail: [
         {
           name: 'High school class schedule',
@@ -52,14 +148,15 @@ export default {
         },
         {
           name: 'Spinny hat',
-          desc: 'Suslando was sick!',
-          effect: ' +12 😎',
-          price: 4,
+          desc: 'That trip was sick!',
+          effect:
+            ' Will unlock the suslando ethan after a certain amount of buys',
+          price: 7,
           unit: `🤔`,
           owned: 0,
           run: a => {
-            if (a.owned === 50) {
-              eventBus.$emit('ethan-unlocked', 'SUSLANDO ETHAN JSON OBJECT')
+            if (a.owned === 10) {
+              eventBus.$emit('ethan-unlocked', 'suslando ethan')
             }
           }
         }

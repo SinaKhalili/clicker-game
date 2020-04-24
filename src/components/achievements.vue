@@ -13,9 +13,11 @@
         <div class="dib f3 w-10">{{ achievement.grade }}</div>
       </li>
     </ul>
-    <a @click="viewAchievements()" href="#" class="tl">{{
+    <a @click="viewAchievements()" href="#" class="tl">
+      {{
       showAchievements
-    }}</a>
+      }}
+    </a>
   </div>
 </template>
 
@@ -24,7 +26,6 @@ import eventBus from '../eventBus'
 export default {
   mounted() {
     eventBus.$on('achievement-unlocked', data => {
-      console.log(data)
       for (let i = 0; i < this.locked_achievements.length; i++) {
         if (this.locked_achievements[i].name === data) {
           this.unlocked_achievements.unshift(this.locked_achievements[i])
@@ -39,6 +40,34 @@ export default {
       viewAllAchievements: false,
       unlocked_achievements: [],
       locked_achievements: [
+        {
+          name: 'Ill cut you',
+          grade: '🥇',
+          desc:
+            'If youre going to threaten someone with a knife, you might as well cut them.'
+        },
+        {
+          name: 'Biting the hand that codes',
+          grade: '🥈',
+          desc: 'My friend got a game and all I got was this lousy cameo.'
+        },
+        {
+          name: 'Top ten anything ever',
+          grade: '🥈',
+          desc:
+            'What this joke lacks in wit and humour it more than makes up for in length.'
+        },
+        {
+          name: 'I take this chip and I eat it',
+          grade: '🥈',
+          desc: 'I take it and yeet it amirite?'
+        },
+        {
+          name: 'CraNezy Canadian Clicker',
+          grade: '🥉',
+          desc:
+            'A real urban climber is the only one who could achieve such clicky expertise'
+        },
         {
           name: 'Clickety clackety this is my property',
           grade: '🥉',
@@ -57,19 +86,9 @@ export default {
           desc: 'Unlocked when defeating SANS undertale'
         },
         {
-          name: 'Call me sonicfox9k',
+          name: 'Bottom empty',
           grade: '🥉',
-          desc: 'Unlocked when defeating sub-zero. Like that one Furry guy.'
-        },
-        {
-          name: 'Not even a platformer',
-          grade: '🥉',
-          desc: 'Unlocked when being lazy and making an idle clicker game'
-        },
-        {
-          name: 'Lookin ass',
-          grade: '🥉',
-          desc: 'Unlocked when eating ahs'
+          desc: "That doesn't even makes sense as a name for a product"
         },
         {
           name: 'Organized af',

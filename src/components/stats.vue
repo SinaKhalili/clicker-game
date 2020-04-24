@@ -9,6 +9,10 @@
         <td :class="att.cls">{{ att.disp }}</td>
       </tr>
     </table>
+    <div v-show="lowHealth">
+      <p>WARNING : LOW HEALTH</p>
+      <p>- try to level up or heal first!</p>
+    </div>
   </div>
 </template>
 
@@ -29,15 +33,20 @@ export default {
     })
 
     eventBus.$on('big-kush-energy', data => {
-      this.energy += 20
+      if (this.energy + data > this.max_energy) {
+        this.energy = this.max_energy
+      } else {
+        this.energy += data
+      }
+    })
+    eventBus.$on('upgrade-energy', data => {
+      this.max_energy += data
     })
     eventBus.$on('game-tick', data => {
       // Store previous context
 
       if (this.energy == 0) {
-        alert(
-          'gameover - close this tab and come back to play again (closing this will open it again)'
-        )
+        eventBus.$emit('game-over')
       }
       if (this.think == 0) {
         if (data.tickFlux < 0) {
@@ -86,6 +95,7 @@ export default {
       cool: 0,
       money: 0,
       energy: 69,
+      max_energy: 69,
       prev_think: 0,
       prev_cool: 1,
       prev_money: 20,
@@ -122,6 +132,9 @@ export default {
           cls: this.energyClass
         }
       }
+    },
+    lowHealth() {
+      return this.energy < 10
     }
   },
   methods: {

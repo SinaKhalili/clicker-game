@@ -7,7 +7,7 @@ import App from './App.vue'
 import '@/assets/global.css'
 
 Vue.config.productionTip = false
-Vue.use(vmodal, { dialog: true }, )
+Vue.use(vmodal, { dialog: true })
 Vue.use(Toasted)
 Vue.toasted.register(
   'achievement',
@@ -36,6 +36,40 @@ Vue.toasted.register(
     theme: 'outline',
     position: 'top-right',
     duration: '450',
+    action: {
+      text: 'Close',
+      onClick: (e, toastObject) => {
+        toastObject.goAway(0)
+      }
+    }
+  }
+)
+Vue.toasted.register(
+  'unlock',
+  payload => {
+    return '🗝 New Unlock! ' + payload
+  },
+  {
+    type: 'success',
+    theme: 'outline',
+    position: 'top-right',
+    action: {
+      text: 'Close',
+      onClick: (e, toastObject) => {
+        toastObject.goAway(0)
+      }
+    }
+  }
+)
+Vue.toasted.register(
+  'loot',
+  payload => {
+    return '⚰ LOOT ⚰ ' + payload
+  },
+  {
+    type: 'success',
+    theme: 'outline',
+    position: 'top-right',
     action: {
       text: 'Close',
       onClick: (e, toastObject) => {
