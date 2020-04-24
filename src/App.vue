@@ -13,14 +13,21 @@
     </div>
     <div v-if="win" class="fl pa3 ma2 b--solid bg-blue shadow-5 db pa3">
       <h1>A HERO IS YOU.</h1>
-      <h3>YOU DID IT. YOU'RE OFFICIALLY 21. YOU also beat this dumb clicker game, but that's unrelated.</h3>
-      <h2>Happy birthday my dude.</h2>
+      <h3>
+        YOU DID IT. YOU'RE OFFICIALLY 22 (or whatever age you actually are when
+        playing this). YOU also beat this dumb clicker game, but that's
+        unrelated.
+      </h3>
       <h1>SPECIALTHANKS : PARSA HABIBI FOR THE SHMOKING VUE 🙏🙏</h1>
       <h1>
         The source code is
-        <a href="https://github.com/SinaKhalili/clicker-game">here</a> which you (ethan) have already starred on github lol
+        <a href="https://github.com/SinaKhalili/clicker-game">here</a> which you
+        (ethan) have already starred on github lol
       </h1>
-      <h4>Thanks to aref, jamal, and cyrus for the ideas when I ran this game by them.</h4>
+      <h4>
+        Thanks to aref, jamal, and cyrus for the ideas when I ran this game by
+        them.
+      </h4>
       <p>Feel free to keep playing to get all the achievements and ethans</p>
     </div>
     <VuexplosiveModal
@@ -46,7 +53,7 @@ import VuexplosiveModal from './components/VuexplosiveModal'
 export default {
   name: 'app',
   methods: {
-    thisFunction() {}
+    thisFunction() {},
   },
   components: {
     ethanPic,
@@ -56,7 +63,7 @@ export default {
     achievements,
     boss,
     shmoke,
-    VuexplosiveModal
+    VuexplosiveModal,
   },
   data() {
     return {
@@ -69,15 +76,16 @@ export default {
       shmoke: false,
       showModal: false,
       gameover: false,
+      win: false,
       eth1: false, // ethan unlock for leveling
       eth2: false, // ethan unlock for leveling
       modalContent: '',
       bgs: ['trippy.gif', 'vapor_walk.gif', 'vapor.gif'],
-      curr_bg: 'trippy.gif'
+      curr_bg: 'trippy.gif',
     }
   },
   mounted() {
-    EventBus.$on('level-up', data => {
+    EventBus.$on('level-up', (data) => {
       // maybe map this to get rid of these gross if statements?
       if (!this.gameover) {
         if (data > 0 && !this.achievements) {
@@ -119,7 +127,7 @@ export default {
         }
       }
     })
-    EventBus.$on('send-modal', data => {
+    EventBus.$on('send-modal', (data) => {
       console.log('model time')
       this.modalContent = data
       this.toggleModal()
@@ -152,9 +160,9 @@ export default {
           You just unlocked the ability to get achievements! These are pretty self-explanatory.`,
         buttons: [
           {
-            title: 'Cool'
-          }
-        ]
+            title: 'Cool',
+          },
+        ],
       })
     },
     explainStats() {
@@ -184,9 +192,9 @@ export default {
         `,
         buttons: [
           {
-            title: 'Cool'
-          }
-        ]
+            title: 'Cool',
+          },
+        ],
       })
     },
     explainInventory() {
@@ -206,9 +214,9 @@ export default {
         `,
         buttons: [
           {
-            title: 'Aight'
-          }
-        ]
+            title: 'Aight',
+          },
+        ],
       })
     },
     explainBoss() {
@@ -226,9 +234,9 @@ export default {
         `,
         buttons: [
           {
-            title: 'Aight'
-          }
-        ]
+            title: 'Aight',
+          },
+        ],
       })
     },
     explainShmoking() {
@@ -245,12 +253,12 @@ export default {
         `,
         buttons: [
           {
-            title: 'Aight'
-          }
-        ]
+            title: 'Aight',
+          },
+        ],
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

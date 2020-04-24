@@ -5,17 +5,36 @@
     <h3>Attack : {{ current_enemy.damage_per_tick }}</h3>
 
     <!-- enemy image -->
-    <img class="f1 unselectable grow" @click="attackEnemy" :src="getImageUrl()" />
+    <img
+      class="f1 unselectable grow"
+      @click="attackEnemy"
+      :src="getImageUrl()"
+    />
 
     <!-- enemy health (number and health bar) -->
-    <p>Health : {{ current_enemy.current_health.toFixed(2) }} / {{ current_enemy.max_health }}</p>
+    <p>
+      Health : {{ current_enemy.current_health.toFixed(2) }} /
+      {{ current_enemy.max_health }}
+    </p>
     <!-- bag health -->
     <div id="enemy-health">
       <div :style="{ width: health_bar_width + '%' }"></div>
     </div>
 
-    <button v-show="current_enemy.dead" class="pointer" @click="current_enemy.loot">LOOT</button>
-    <button v-show="current_enemy.dead" class="pointer red" @click="next_battle">Begin Next Battle</button>
+    <button
+      v-show="current_enemy.dead"
+      class="pointer"
+      @click="current_enemy.loot"
+    >
+      LOOT
+    </button>
+    <button
+      v-show="current_enemy.dead"
+      class="pointer red"
+      @click="next_battle"
+    >
+      Begin Next Battle
+    </button>
   </div>
 </template>
 
@@ -24,17 +43,21 @@ import eventBus from '../eventBus'
 
 export default {
   mounted() {
-    eventBus.$on('game-tick', data => {
+    eventBus.$on('game-tick', (data) => {
       if (this.active && !this.current_enemy.dead) {
         eventBus.$emit('enemy-attack', this.current_enemy)
       }
     })
-    eventBus.$on('attack-upgrade', data => {
+    eventBus.$on('attack-upgrade', (data) => {
       this.player_attack += data
+    })
+    eventBus.$on('final-boss-unlock', () => {
+      this.final_boss = true
     })
   },
   data() {
     return {
+      final_boss: false,
       all_enemies: [
         {
           max_health: 40,
@@ -54,9 +77,9 @@ export default {
                     <b> NOTE </b> remember to heal and shit for the next battle next battle!`,
               buttons: [
                 {
-                  title: 'Ok cool, also your tutorial is shit'
-                }
-              ]
+                  title: 'Ok cool, also your tutorial is shit',
+                },
+              ],
             })
           },
           loot: () => {
@@ -67,7 +90,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: 'Sanic',
@@ -89,7 +112,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: 'Light TURNER',
@@ -114,7 +137,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: '10 Devin Pal',
@@ -136,7 +159,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: '9 DP Fiji',
@@ -158,7 +181,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: '8 Dphijian',
@@ -180,7 +203,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: "7 JD's brother",
@@ -202,7 +225,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: '6 DRP323',
@@ -224,7 +247,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: '5 The Black Hercules',
@@ -246,7 +269,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: "4 Darren's cousin",
@@ -268,7 +291,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: "3 Angie's brother",
@@ -290,7 +313,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: '2 DRP232',
@@ -312,7 +335,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: 'Darren Reddy',
@@ -334,7 +357,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: 'Me',
@@ -356,15 +379,15 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: 'Mr Natas',
           max_health: 250,
           current_health: 250,
           damage_per_tick: 3.5,
-          image: 'me.png',
-          death_image: 'me.png',
+          image: 'mr_natas.jpg',
+          death_image: 'mr_natas.jpg',
           dead: false,
           reward: '500 think',
           run: () => {
@@ -380,14 +403,14 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
+          },
         },
         {
           name: 'Age 21 as a concept',
           max_health: 1000,
           current_health: 1000,
           damage_per_tick: 4,
-          image: 'me.png',
+          image: '21.png',
           death_image: '21.png',
           dead: false,
           reward: '500 think',
@@ -402,13 +425,13 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          }
-        }
+          },
+        },
       ],
       active: true,
       player_attack: 1,
       enemy_level: 0,
-      looted: false
+      looted: false,
     }
   },
   computed: {
@@ -420,7 +443,7 @@ export default {
     },
     current_enemy() {
       return this.all_enemies[this.enemy_level]
-    }
+    },
   },
   methods: {
     getImageUrl() {
@@ -451,19 +474,34 @@ export default {
               handler: () => {
                 this.enemy_level += 1
                 this.looted = false
-              }
+              },
             },
             {
-              title: 'Ok thanks for the heads up'
-            }
-          ]
+              title: 'Ok thanks for the heads up',
+            },
+          ],
         })
+      } else if (this.enemy_level == this.all_enemies.length - 2) {
+        if (!this.final_boss) {
+          this.$modal.show('dialog', {
+            title: 'SORRY PEA BRAIN',
+            text: 'Only the trascendent can enter the final arena',
+            buttons: [
+              {
+                title: 'Huh?',
+              },
+            ],
+          })
+        } else {
+          this.enemy_level += 1
+          this.looted = false
+        }
       } else {
         this.enemy_level += 1
         this.looted = false
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

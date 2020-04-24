@@ -44,7 +44,7 @@ export default {
           name: 'Mind altering substances',
           desc: 'Destroy your notion of notions',
           effect: ' Pop twice for instant Enlightenment ',
-          price: 1337133713371337,
+          price: 1337420,
           unit: `🤔`,
           owned: 0,
           clickAdders: '0',
