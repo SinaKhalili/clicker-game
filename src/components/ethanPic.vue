@@ -95,7 +95,7 @@ export default {
   },
   data() {
     return {
-      clickMultipliers: 7,
+      clickMultipliers: 0,
       clickAdders: 1,
       tickFlux: -0.05,
       currQuote: 0,
