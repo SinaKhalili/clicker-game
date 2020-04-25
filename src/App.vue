@@ -189,9 +189,9 @@ export default {
     endRunStats() {
       let endTemp = [
         { name: 'inventory', time: this.invTime },
+        { name: 'moustache unlocked', time: this.moustacheTime },
         { name: 'horny mushroom defeated', time: this.hornTime },
         { name: 'hercules defeated', time: this.herculesTime },
-        { name: 'moustache unlocked', time: this.moustacheTime },
         { name: 'max level reached', time: this.maxLevelTime },
         { name: 'MAS1', time: this.MAS1 },
         { name: 'MAS2', time: this.MAS2 },
