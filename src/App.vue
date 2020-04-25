@@ -138,7 +138,6 @@ export default {
         }
         if (data > 4 && !this.inventory) {
           this.invTime = Date.now() - this.beginTime
-          console.log(this.timeToString({ name: 'h', time: this.invTime }))
           this.inventory = true
           this.progressions = true
           this.explainInventory()
@@ -164,7 +163,6 @@ export default {
       }
     })
     EventBus.$on('send-modal', data => {
-      console.log('model time')
       this.modalContent = data
       this.toggleModal()
     })
@@ -197,7 +195,7 @@ export default {
         { name: 'MAS2', time: this.MAS2 },
         { name: 'FINAL TIME', time: this.finalTime }
       ]
-      return this.data.map(this.timeToString)
+      return this.data.map(endTemp)
     }
   },
   methods: {

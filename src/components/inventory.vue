@@ -45,7 +45,6 @@ export default {
     })
     eventBus.$on('ethan-unlocked', data => {
       this.$toasted.global.unlock(' NEW ETHAN 👉' + data)
-      console.log(data)
       for (let i = 0; i < this.allEthans.length; i++) {
         if (this.allEthans[i].name === data) {
           this.availEthans.unshift(this.allEthans[i])

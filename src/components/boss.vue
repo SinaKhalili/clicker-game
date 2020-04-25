@@ -133,9 +133,7 @@ export default {
           death_image: '10_dp.png',
           dead: false,
           reward: '200 think',
-          run: () => {
-            console.log('holy shit thats a lot of devins')
-          },
+          run: () => {},
           loot: () => {
             if (!this.looted) {
               this.$toasted.global.loot(' + 240 think ')
@@ -155,9 +153,7 @@ export default {
           death_image: '9_dp.png',
           dead: false,
           reward: '200 think',
-          run: () => {
-            console.log('holy shit thats a lot of devins')
-          },
+          run: () => {},
           loot: () => {
             if (!this.looted) {
               this.$toasted.global.loot(' + 240 think ')
@@ -177,9 +173,7 @@ export default {
           death_image: '8_dp.png',
           dead: false,
           reward: '200 think',
-          run: () => {
-            console.log('holy shit thats a lot of devins')
-          },
+          run: () => {},
           loot: () => {
             if (!this.looted) {
               this.$toasted.global.loot(' + 240 think ')
@@ -199,9 +193,7 @@ export default {
           death_image: '7_dp.png',
           dead: false,
           reward: '200 think',
-          run: () => {
-            console.log('holy shit thats a lot of devins')
-          },
+          run: () => {},
           loot: () => {
             if (!this.looted) {
               this.$toasted.global.loot(' + 240 think ')
@@ -221,9 +213,7 @@ export default {
           death_image: '6_dp.png',
           dead: false,
           reward: '200 think',
-          run: () => {
-            console.log('holy shit thats a lot of devins')
-          },
+          run: () => {},
           loot: () => {
             if (!this.looted) {
               this.$toasted.global.loot(' + 240 think ')
@@ -244,7 +234,6 @@ export default {
           dead: false,
           reward: '200 think',
           run: () => {
-            console.log('holy shit thats a lot of devins')
             this.eventBus.$emit('hercules-killed')
           },
           loot: () => {
@@ -266,9 +255,7 @@ export default {
           death_image: '4_dp.png',
           dead: false,
           reward: '200 think',
-          run: () => {
-            console.log('holy shit thats a lot of devins')
-          },
+          run: () => {},
           loot: () => {
             if (!this.looted) {
               this.$toasted.global.loot(' + 240 think ')
@@ -288,9 +275,7 @@ export default {
           death_image: '3_dp.png',
           dead: false,
           reward: '200 think',
-          run: () => {
-            console.log('holy shit thats a lot of devins')
-          },
+          run: () => {},
           loot: () => {
             if (!this.looted) {
               this.$toasted.global.loot(' + You found an ethan! ')
@@ -310,9 +295,7 @@ export default {
           death_image: '2_dp.png',
           dead: false,
           reward: '200 think',
-          run: () => {
-            console.log('holy shit thats a lot of devins')
-          },
+          run: () => {},
           loot: () => {
             if (!this.looted) {
               this.$toasted.global.loot(' + 240 think ')
