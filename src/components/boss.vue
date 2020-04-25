@@ -250,7 +250,7 @@ export default {
           dead: false,
           reward: '200 think',
           run: () => {
-            this.eventBus.$emit('hercules-killed')
+            eventBus.$emit('hercules-killed')
           },
           loot: () => {
             if (!this.looted) {
