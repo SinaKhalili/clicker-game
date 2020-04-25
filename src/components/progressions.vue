@@ -26,6 +26,13 @@ export default {
       for (let i = 0; i < this.avail.length; i++) {
         if (this.avail[i] === data) {
           this.avail[i].owned += 1
+          if (this.avail[i].name === 'Mind altering substances') {
+            if (this.avail[i].owned === 1) {
+              eventBus.$emit('MAS1')
+            } else if (this.avail[i].owned === 2) {
+              eventBus.$emit('MAS2')
+            }
+          }
         }
       }
     })

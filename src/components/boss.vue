@@ -5,11 +5,7 @@
     <h3>Attack : {{ current_enemy.damage_per_tick }}</h3>
 
     <!-- enemy image -->
-    <img
-      class="f1 unselectable grow"
-      @click="attackEnemy"
-      :src="getImageUrl()"
-    />
+    <img class="f1 unselectable grow" @click="attackEnemy" :src="getImageUrl()" />
 
     <!-- enemy health (number and health bar) -->
     <p>
@@ -21,20 +17,8 @@
       <div :style="{ width: health_bar_width + '%' }"></div>
     </div>
 
-    <button
-      v-show="current_enemy.dead"
-      class="pointer"
-      @click="current_enemy.loot"
-    >
-      LOOT
-    </button>
-    <button
-      v-show="current_enemy.dead"
-      class="pointer red"
-      @click="next_battle"
-    >
-      Begin Next Battle
-    </button>
+    <button v-show="current_enemy.dead" class="pointer" @click="current_enemy.loot">LOOT</button>
+    <button v-show="current_enemy.dead" class="pointer red" @click="next_battle">Begin Next Battle</button>
   </div>
 </template>
 
@@ -43,12 +27,12 @@ import eventBus from '../eventBus'
 
 export default {
   mounted() {
-    eventBus.$on('game-tick', (data) => {
+    eventBus.$on('game-tick', data => {
       if (this.active && !this.current_enemy.dead) {
         eventBus.$emit('enemy-attack', this.current_enemy)
       }
     })
-    eventBus.$on('attack-upgrade', (data) => {
+    eventBus.$on('attack-upgrade', data => {
       this.player_attack += data
     })
     eventBus.$on('final-boss-unlock', () => {
@@ -70,6 +54,7 @@ export default {
           reward: '1000 think',
           run: () => {
             eventBus.$emit('achievement-unlocked', '🍁 Royal')
+            eventBus.$emit('horny-killed')
             this.$modal.show('dialog', {
               title: `<h1> Enemy defeated! </h1>`,
               text: `You are glorious
@@ -77,9 +62,9 @@ export default {
                     <b> NOTE </b> remember to heal and shit for the next battle next battle!`,
               buttons: [
                 {
-                  title: 'Ok cool, also your tutorial is shit',
-                },
-              ],
+                  title: 'Ok cool, also your tutorial is shit'
+                }
+              ]
             })
           },
           loot: () => {
@@ -90,7 +75,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: 'Sanic',
@@ -112,7 +97,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: 'Light TURNER',
@@ -137,7 +122,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: '10 Devin Pal',
@@ -159,7 +144,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: '9 DP Fiji',
@@ -181,7 +166,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: '8 Dphijian',
@@ -203,7 +188,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: "7 JD's brother",
@@ -225,7 +210,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: '6 DRP323',
@@ -247,7 +232,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: '5 The Black Hercules',
@@ -260,6 +245,7 @@ export default {
           reward: '200 think',
           run: () => {
             console.log('holy shit thats a lot of devins')
+            this.eventBus.$emit('hercules-killed')
           },
           loot: () => {
             if (!this.looted) {
@@ -269,7 +255,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: "4 Darren's cousin",
@@ -291,7 +277,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: "3 Angie's brother",
@@ -313,7 +299,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: '2 DRP232',
@@ -335,7 +321,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: 'Darren Reddy',
@@ -357,7 +343,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: 'Me',
@@ -379,7 +365,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: 'Mr Natas',
@@ -391,7 +377,7 @@ export default {
           dead: false,
           reward: '500 think',
           run: () => {
-            eventBus.$emit('achievement-unlocked', 'Biting the hand that codes')
+            eventBus.$emit('natas-killed')
           },
           loot: () => {
             if (!this.looted) {
@@ -403,7 +389,7 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
+          }
         },
         {
           name: 'Age 21 as a concept',
@@ -425,13 +411,13 @@ export default {
               this.$toasted.global.loot(' ❌ Already looted ❌')
             }
             this.looted = true
-          },
-        },
+          }
+        }
       ],
       active: true,
       player_attack: 1,
       enemy_level: 0,
-      looted: false,
+      looted: false
     }
   },
   computed: {
@@ -443,7 +429,7 @@ export default {
     },
     current_enemy() {
       return this.all_enemies[this.enemy_level]
-    },
+    }
   },
   methods: {
     getImageUrl() {
@@ -474,12 +460,12 @@ export default {
               handler: () => {
                 this.enemy_level += 1
                 this.looted = false
-              },
+              }
             },
             {
-              title: 'Ok thanks for the heads up',
-            },
-          ],
+              title: 'Ok thanks for the heads up'
+            }
+          ]
         })
       } else if (this.enemy_level == this.all_enemies.length - 2) {
         if (!this.final_boss) {
@@ -488,9 +474,9 @@ export default {
             text: 'Only the trascendent can enter the final arena',
             buttons: [
               {
-                title: 'Huh?',
-              },
-            ],
+                title: 'Huh?'
+              }
+            ]
           })
         } else {
           this.enemy_level += 1
@@ -500,8 +486,8 @@ export default {
         this.enemy_level += 1
         this.looted = false
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

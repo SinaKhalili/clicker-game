@@ -2,6 +2,7 @@
   <div id="s" class="fl ma2 tc b--solid bg-green shadow-5 db pa3">
     <h2>🌲 SHMOKE up FELLA 🌲</h2>
     <img class="snoop pointer grow" @click="shmoke_weed" :src="getimageUrl()" />
+    <img v-if="waiting" :src="require('../assets/backgrounds/timer.gif')" />
   </div>
 </template>
 
@@ -12,6 +13,8 @@ import { setTimeout } from 'timers'
 export default {
   data() {
     return {
+      waiting: false,
+      secsLeft: 31,
       heal_bonus: 20,
       shmoking: {
         shmoked: true,
@@ -46,10 +49,12 @@ export default {
     },
     reset_joints() {
       this.shmoke.joints = 0
+      this.waiting = false
     },
 
     shmoke_weed() {
       if (this.shmoke.joints > 4) {
+        this.waiting = true
         this.$modal.show('dialog', {
           title: `<h1>😤 SORRY THICKBOI , Youre all out of Js 😤</h1>`,
           buttons: [

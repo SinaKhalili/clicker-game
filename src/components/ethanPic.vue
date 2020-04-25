@@ -5,16 +5,13 @@
     <blockquote
       v-if="checkpoint0"
       class="athelas mw5 ml0 mt0 pl4 black-90 bl bw2 b--blue"
-    >
-      {{ ethanQuotes[currQuote] }}
-    </blockquote>
+    >{{ ethanQuotes[currQuote] }}</blockquote>
     <div class="db mb1">
       <a
         class="f1 unselectable grow no-underline br-pill ph3 pv2 mb2 dib white bg-white"
         @click="clickThink"
         href="#0"
-        >🤔</a
-      >
+      >🤔</a>
     </div>
     <img v-if="checkpoint1" class="mw5" :src="getImageUrl()" />
     <p v-if="checkpoint1">Current Ethan:</p>
@@ -24,12 +21,8 @@
       <p>Effect : {{ currEthan.effect }}</p>
       <p>Description : {{ currEthan.desc }}</p>
     </div>
-    <h3 class="code" v-if="accruedShow">
-      Accrued thought: {{ cummulativeThink.toFixed(1) }}
-    </h3>
-    <h3 class="code" v-if="accruedShow">
-      Next level at: {{ this.clickThresholds[this.currLevel] }}
-    </h3>
+    <h3 class="code" v-if="accruedShow">Accrued thought: {{ cummulativeThink.toFixed(1) }}</h3>
+    <h3 class="code" v-if="accruedShow">Next level at: {{ this.clickThresholds[this.currLevel] }}</h3>
   </div>
 </template>
 
@@ -46,7 +39,7 @@ export default {
     },
     getImageUrl() {
       return require('../assets/ethans/' + this.currEthan.image)
-    },
+    }
   },
   mounted() {
     this.$modal.show('dialog', {
@@ -60,12 +53,12 @@ export default {
             alert(
               `fair - but listen, it does have some pretty solid references you can think of it as art if you want.`
             )
-          },
+          }
         },
         {
-          title: "Let's see what ya got, boy",
-        },
-      ],
+          title: "Let's see what ya got, boy"
+        }
+      ]
     })
     EventBus.$on('game-tick', () => {
       if (this.currLevel < this.clickThresholds.length - 1) {
@@ -78,22 +71,25 @@ export default {
             } clicks! </p>`
           )
           this.currLevel += 1
+          if (this.currLevel === this.clickThresholds.length - 1) {
+            EventBus.$emit('max-level')
+          }
         }
       } else {
         this.currLevel = this.clickThresholds[this.clickThresholds.length - 1]
       }
     })
-    EventBus.$on('ethan-change', (data) => {
+    EventBus.$on('ethan-change', data => {
       this.currEthan = data
       if (this.currEthan.name === 'INFINITE ETHAN') {
         EventBus.$emit('final-boss-unlock')
       }
       this.currQuote = Math.floor(Math.random() * this.ethanQuotes.length)
     })
-    EventBus.$on('think-click', (data) => {
+    EventBus.$on('think-click', data => {
       this.cummulativeThink += data.thinks
     })
-    EventBus.$on('item-bought', (data) => {
+    EventBus.$on('item-bought', data => {
       //pass
       this.clickMultipliers += parseFloat(data.clickMultipliers)
         ? parseFloat(data.clickMultipliers)
@@ -118,7 +114,7 @@ export default {
         "Listen, traps aren't gay. The US army ... ",
         '*shakes hands*',
         '  *shakes hands, grabs elbow* ',
-        ' Yeah dude, I saw a reddit post about it ',
+        ' Yeah dude, I saw a reddit post about it '
       ],
       cummulativeThink: 0,
       currEthan: {
@@ -127,8 +123,8 @@ export default {
         effect: ' None',
         desc: 'Default starter ethan. Neat dude.',
         image: 'ethan_beedie.jpg',
-        adder: 1,
-        multiplier: 0,
+        adder: 170,
+        multiplier: 0
       },
       levels: [
         'MAX LEVEL LEVEL',
@@ -143,7 +139,7 @@ export default {
         1000,
         500,
         100,
-        50,
+        50
       ],
       currLevel: 0,
       clickThresholds: [
@@ -162,14 +158,14 @@ export default {
         15000,
         20000,
         50000,
-        'MAX LEVEL',
+        'MAX LEVEL'
       ],
       showModal: false,
-      modalContent: ' One think closer',
+      modalContent: ' One think closer'
     }
   },
   components: {
-    VuexplosiveModal,
+    VuexplosiveModal
   },
   computed: {
     ethanClickMultipliers() {
@@ -186,8 +182,8 @@ export default {
     },
     accruedShow() {
       return this.cummulativeThink > 1
-    },
-  },
+    }
+  }
 }
 </script>
 

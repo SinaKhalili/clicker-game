@@ -9,6 +9,7 @@
         <td :class="att.cls">{{ att.disp }}</td>
       </tr>
     </table>
+    <div>MAX energy: {{ this.max_energy }}</div>
     <div v-show="lowHealth">
       <p>WARNING : LOW HEALTH</p>
       <p>- try to level up or heal first!</p>

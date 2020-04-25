@@ -1,18 +1,16 @@
 <template>
   <div id="app" v-bind:style="{ backgroundImage: curr_bg }">
-    <ethan-pic />
-    <stats v-show="stats" />
-    <boss v-if="boss" />
-    <inventory v-if="inventory" />
-    <progressions v-if="progressions" />
-    <achievements v-if="achievements" />
-    <shmoke v-if="shmoke" />
-
     <div v-if="gameover" class="fl pa3 ma2 b--solid bg-red shadow-5 db pa3">
       <h1>GAME OVER FRIEND. REFRESH THE PAGE AND TRY AGAIN.</h1>
     </div>
     <div v-if="win" class="fl pa3 ma2 b--solid bg-blue shadow-5 db pa3">
       <h1>A HERO IS YOU.</h1>
+      <ul class="list pl0 ml0 tl mw5 ba b--black br0">
+        <li v-for="t in endRunStats" :key="t.name" class="ph3 pv2 bb b--black">
+          <div>{{ t.name }}</div>
+          <div>{{ t.time }}</div>
+        </li>
+      </ul>
       <h3>
         YOU DID IT. YOU'RE OFFICIALLY 22 (or whatever age you actually are when
         playing this). YOU also beat this dumb clicker game, but that's
@@ -30,6 +28,13 @@
       </h4>
       <p>Feel free to keep playing to get all the achievements and ethans</p>
     </div>
+    <ethan-pic />
+    <stats v-show="stats" />
+    <boss v-if="boss" />
+    <inventory v-if="inventory" />
+    <progressions v-if="progressions" />
+    <achievements v-if="achievements" />
+    <shmoke v-if="shmoke" />
     <VuexplosiveModal
       :visible="showModal"
       title=" 🔥 LEVEL UP! 🔥 "
@@ -52,9 +57,6 @@ import VuexplosiveModal from './components/VuexplosiveModal'
 
 export default {
   name: 'app',
-  methods: {
-    thisFunction() {},
-  },
   components: {
     ethanPic,
     stats,
@@ -63,10 +65,21 @@ export default {
     achievements,
     boss,
     shmoke,
-    VuexplosiveModal,
+    VuexplosiveModal
   },
   data() {
     return {
+      beginTime: 0,
+      invTime: 0,
+      hornTime: 0,
+      moustacheTime: 0,
+      smokeTime: 0,
+      maxLevelTime: 0,
+      mrNatasTime: 0,
+      MAS1: 0,
+      MAS2: 0,
+      finalTime: 0,
+      herculesTime: 0,
       achievements: false,
       stats: false,
       progressions: false,
@@ -81,11 +94,30 @@ export default {
       eth2: false, // ethan unlock for leveling
       modalContent: '',
       bgs: ['trippy.gif', 'vapor_walk.gif', 'vapor.gif'],
-      curr_bg: 'trippy.gif',
+      curr_bg: 'trippy.gif'
     }
   },
   mounted() {
-    EventBus.$on('level-up', (data) => {
+    this.beginTime = Date.now()
+    EventBus.$on('hercules-killed', () => {
+      this.herculesTime = Date.now() - this.beginTime
+    })
+    EventBus.$on('MAS2', () => {
+      this.MAS2 = Date.now() - this.beginTime
+    })
+    EventBus.$on('MAS1', () => {
+      this.MAS1 = Date.now() - this.beginTime
+    })
+    EventBus.$on('horny-killed', () => {
+      this.hornTime = Date.now() - this.beginTime
+    })
+    EventBus.$on('natas-killed', () => {
+      this.mrNatasTime = Date.now() - this.beginTime
+    })
+    EventBus.$on('max-level', () => {
+      this.maxLevelTime = Date.now() - this.beginTime
+    })
+    EventBus.$on('level-up', data => {
       // maybe map this to get rid of these gross if statements?
       if (!this.gameover) {
         if (data > 0 && !this.achievements) {
@@ -105,11 +137,14 @@ export default {
           this.explainStats()
         }
         if (data > 4 && !this.inventory) {
+          this.invTime = Date.now() - this.beginTime
+          console.log(this.timeToString({ name: 'h', time: this.invTime }))
           this.inventory = true
           this.progressions = true
           this.explainInventory()
         }
         if (data > 5 && !this.eth1) {
+          this.moustacheTime = Date.now() - this.beginTime
           EventBus.$emit('ethan-unlocked', 'moustache ethan')
           this.eth1 = true
         }
@@ -122,12 +157,13 @@ export default {
           this.eth2 = true
         }
         if (data > 8 && !this.shmoke) {
+          this.smokeTime = Date.now() - this.beginTime
           this.shmoke = true
           this.explainShmoking()
         }
       }
     })
-    EventBus.$on('send-modal', (data) => {
+    EventBus.$on('send-modal', data => {
       console.log('model time')
       this.modalContent = data
       this.toggleModal()
@@ -145,10 +181,40 @@ export default {
       this.win
     })
     EventBus.$on('win', () => {
+      this.finalTime = Date.now() - this.beginTime
       this.win = true
     })
   },
+  computed: {
+    endRunStats() {
+      let endTemp = [
+        { name: 'inventory', time: this.invTime },
+        { name: 'horny mushroom defeated', time: this.hornTime },
+        { name: 'hercules defeated', time: this.herculesTime },
+        { name: 'moustache unlocked', time: this.moustacheTime },
+        { name: 'max level reached', time: this.maxLevelTime },
+        { name: 'MAS1', time: this.MAS1 },
+        { name: 'MAS2', time: this.MAS2 },
+        { name: 'FINAL TIME', time: this.finalTime }
+      ]
+      return this.data.map(this.timeToString)
+    }
+  },
   methods: {
+    timeToString(inputTime) {
+      let d = new Date(inputTime.time)
+      return {
+        name: inputTime.name,
+        time:
+          d.getUTCHours() +
+          ':' +
+          d.getUTCMinutes() +
+          ':' +
+          d.getUTCSeconds() +
+          ':' +
+          d.getUTCMilliseconds()
+      }
+    },
     toggleModal() {
       this.showModal = !this.showModal
     },
@@ -160,9 +226,9 @@ export default {
           You just unlocked the ability to get achievements! These are pretty self-explanatory.`,
         buttons: [
           {
-            title: 'Cool',
-          },
-        ],
+            title: 'Cool'
+          }
+        ]
       })
     },
     explainStats() {
@@ -192,9 +258,9 @@ export default {
         `,
         buttons: [
           {
-            title: 'Cool',
-          },
-        ],
+            title: 'Cool'
+          }
+        ]
       })
     },
     explainInventory() {
@@ -214,9 +280,9 @@ export default {
         `,
         buttons: [
           {
-            title: 'Aight',
-          },
-        ],
+            title: 'Aight'
+          }
+        ]
       })
     },
     explainBoss() {
@@ -234,9 +300,9 @@ export default {
         `,
         buttons: [
           {
-            title: 'Aight',
-          },
-        ],
+            title: 'Aight'
+          }
+        ]
       })
     },
     explainShmoking() {
@@ -253,12 +319,12 @@ export default {
         `,
         buttons: [
           {
-            title: 'Aight',
-          },
-        ],
+            title: 'Aight'
+          }
+        ]
       })
-    },
-  },
+    }
+  }
 }
 </script>
 
