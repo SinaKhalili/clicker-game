@@ -65,7 +65,7 @@ export default {
     achievements,
     boss,
     shmoke,
-    VuexplosiveModal
+    VuexplosiveModal,
   },
   data() {
     return {
@@ -94,7 +94,7 @@ export default {
       eth2: false, // ethan unlock for leveling
       modalContent: '',
       bgs: ['trippy.gif', 'vapor_walk.gif', 'vapor.gif'],
-      curr_bg: 'trippy.gif'
+      curr_bg: 'trippy.gif',
     }
   },
   mounted() {
@@ -117,7 +117,7 @@ export default {
     EventBus.$on('max-level', () => {
       this.maxLevelTime = Date.now() - this.beginTime
     })
-    EventBus.$on('level-up', data => {
+    EventBus.$on('level-up', (data) => {
       // maybe map this to get rid of these gross if statements?
       if (!this.gameover) {
         if (data > 0 && !this.achievements) {
@@ -162,7 +162,7 @@ export default {
         }
       }
     })
-    EventBus.$on('send-modal', data => {
+    EventBus.$on('send-modal', (data) => {
       this.modalContent = data
       this.toggleModal()
     })
@@ -193,10 +193,10 @@ export default {
         { name: 'max level reached', time: this.maxLevelTime },
         { name: 'MAS1', time: this.MAS1 },
         { name: 'MAS2', time: this.MAS2 },
-        { name: 'FINAL TIME', time: this.finalTime }
+        { name: 'FINAL TIME', time: this.finalTime },
       ]
-      return this.data.map(endTemp)
-    }
+      return endTemp.map(this.timeToString)
+    },
   },
   methods: {
     timeToString(inputTime) {
@@ -210,7 +210,7 @@ export default {
           ':' +
           d.getUTCSeconds() +
           ':' +
-          d.getUTCMilliseconds()
+          d.getUTCMilliseconds(),
       }
     },
     toggleModal() {
@@ -224,9 +224,9 @@ export default {
           You just unlocked the ability to get achievements! These are pretty self-explanatory.`,
         buttons: [
           {
-            title: 'Cool'
-          }
-        ]
+            title: 'Cool',
+          },
+        ],
       })
     },
     explainStats() {
@@ -256,9 +256,9 @@ export default {
         `,
         buttons: [
           {
-            title: 'Cool'
-          }
-        ]
+            title: 'Cool',
+          },
+        ],
       })
     },
     explainInventory() {
@@ -278,9 +278,9 @@ export default {
         `,
         buttons: [
           {
-            title: 'Aight'
-          }
-        ]
+            title: 'Aight',
+          },
+        ],
       })
     },
     explainBoss() {
@@ -298,9 +298,9 @@ export default {
         `,
         buttons: [
           {
-            title: 'Aight'
-          }
-        ]
+            title: 'Aight',
+          },
+        ],
       })
     },
     explainShmoking() {
@@ -317,12 +317,12 @@ export default {
         `,
         buttons: [
           {
-            title: 'Aight'
-          }
-        ]
+            title: 'Aight',
+          },
+        ],
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
