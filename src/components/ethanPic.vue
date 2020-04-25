@@ -123,7 +123,7 @@ export default {
         effect: ' None',
         desc: 'Default starter ethan. Neat dude.',
         image: 'ethan_beedie.jpg',
-        adder: 170,
+        adder: 1,
         multiplier: 0
       },
       levels: [
