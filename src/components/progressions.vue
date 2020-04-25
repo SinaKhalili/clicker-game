@@ -41,10 +41,27 @@ export default {
     return {
       notAvail: [
         {
+          name: "Crashing ethan's computer",
+          desc: 'I cant believe that happened lmao',
+          effect: ' Pop twice for instant crash ',
+          price: 1337420,
+          unit: `🤔`,
+          owned: 0,
+          clickAdders: '0',
+          clickMultipliers: '0.0',
+          tickFlux: 0.0,
+          image: 'pc_crash.png',
+          run: a => {
+            if (a.owned === 1) {
+              eventBus.$emit('ethan-unlocked', 'INFINITE ETHAN')
+            }
+          }
+        },
+        {
           name: 'Mind altering substances',
           desc: 'Destroy your notion of notions',
           effect: ' Pop twice for instant Enlightenment ',
-          price: 1337420,
+          price: 133769,
           unit: `🤔`,
           owned: 0,
           clickAdders: '0',
