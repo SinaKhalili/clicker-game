@@ -11,6 +11,12 @@
           <div>{{ t.time }}</div>
         </li>
       </ul>
+      <h2>
+        Did good? Check out the
+        <a
+          href="https://docs.google.com/spreadsheets/d/1QU_oNfRR-14Mj1a1X4I_t3eRBlJ1xPij1v5fDt14FMg/edit?usp=sharing"
+        >OFFICIAL LEADERBOARD!</a> dm me ur time 👌
+      </h2>
       <h3>
         YOU DID IT. YOU'RE OFFICIALLY 22 (or whatever age you actually are when
         playing this). YOU also beat this dumb clicker game, but that's
