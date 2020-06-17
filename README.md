@@ -10,3 +10,7 @@ Truly it is the experience you've been waiting for
 ![](./screenshot.png)
 
 An adventure awaits
+
+### For the truly curious
+
+Try it with the [testimonials](https://sinakhalili.com/ethan.html)
